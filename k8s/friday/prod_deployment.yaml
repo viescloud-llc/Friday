@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: friday-prod-deployment
+  namespace: friday-prod
+  labels:
+    app: friday-prod
+spec:
+  selector:
+    matchLabels:
+      app: friday-prod
+  replicas: 6
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: friday-prod
+    spec:
+      containers:
+      - name: friday-prod
+        image: vincentbuiwork/friday:prod
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 500M
+          limits:
+            memory: 3Gi
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        ports:
+        - containerPort: 80
+      restartPolicy: Always
