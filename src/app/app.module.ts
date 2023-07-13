@@ -10,10 +10,20 @@ import { NgComponentModule } from './shared/module/ng-component.module';
 import { NgDialogModule } from './shared/module/ng-dialog.module ';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/guards/auth.interceptor';
+import { HeaderComponent } from './header/header.component';
+import { SideDrawerComponent } from './side-drawer/side-drawer.component';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    SideDrawerComponent,
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     NgEssentialModule,
