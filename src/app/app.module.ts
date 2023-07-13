@@ -1,9 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
+import { ChangeDetectorRef, Injector, NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgEssentialModule } from './shared/module/ng-essential.module';
 import { NgMaterialModule } from './shared/module/ng-material.module';
 import { NgComponentModule } from './shared/module/ng-component.module';

@@ -1,41 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticatorService } from '../shared/service/Authenticator.service';
 import { first } from 'rxjs';
+import { FixChangeDetection } from '../shared/directive/FixChangeDetection';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends FixChangeDetection implements OnInit {
 
-  loginForm!: FormGroup;
-
+  validForm: boolean = false;
   error: string = '';
-
   username: string = '';
   password: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private authenticatorService: AuthenticatorService) { }
+  constructor(
+    private router: Router,
+    private authenticatorService: AuthenticatorService
+  ) { super(); }
 
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
     this.authenticatorService.isLoginCallWithReroute("/home");
-    this.loginForm = this.fb.group(
-      {
-        username: ['', [Validators.required]],
-        password: ['', [Validators.required]]
-      }
-    )
   }
-  
-  login()
-  {
-    this.authenticatorService.login(this.loginForm.value).pipe(first()).subscribe(
+
+  login() {
+    this.authenticatorService.login({ username: this.username, password: this.password }).pipe(first()).subscribe(
       async res => {
-        await this.authenticatorService.autoUpdateUserWithJwt(res.jwt!); 
+        await this.authenticatorService.autoUpdateUserWithJwt(res.jwt!);
         this.router.navigate(['home'])
       },
       error => {

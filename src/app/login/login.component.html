@@ -1,21 +1,8 @@
-<div class="margin-center">
-    <form [formGroup]="loginForm" class="d-flex flex-column">
-        <div *ngIf="error">
-            <h1 class="text-center" style="color: red;">{{error}}</h1>
-        </div>
-        <mat-form-field appearance="fill">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Username" formControlName="username" required>
-            <mat-error *ngIf="loginForm.get('username')?.getError('required')">Username can't be empty</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Password</mat-label>
-            <input matInput type="password" placeholder="Password" formControlName="password" required>
-            <mat-error *ngIf="loginForm.get('password')?.getError('required')">Username can't be empty</mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" [disabled]="loginForm.invalid" (click)="login()">Login</button>
-    </form>
+<div class="margin-center" appMatFormFieldGroup (onAllInputCheck)="validForm = $event">
     <ul>
+        <li *ngIf="error">
+            <h1 class="text-center" style="color: red;">{{error}}</h1>
+        </li>
         <li>
             <app-mat-form-field-input
             [value]="username" (valueOutput)="username = $event"
@@ -25,6 +12,16 @@
             styleWidth="100%"
             ></app-mat-form-field-input>
         </li>
+        <li>
+            <app-mat-form-field-input
+            [value]="password" (valueOutput)="password = $event"
+            label="Password"
+            placeholder="Your login password"
+            [required]="true"
+            styleWidth="100%"
+            ></app-mat-form-field-input>
+        </li>
+        <li><button mat-raised-button color="primary" style="width: 100%;" [disabled]="!validForm" (click)="login()">Login</button></li>
         <li><h3>Need to <a routerLink="/register">register</a> ?</h3></li>
     </ul>
 </div>
