@@ -3,8 +3,9 @@
 
   <input 
   #input 
+  matInput 
   [ngStyle]="{color: error ? 'red' : defaultTextColor}" 
-  matInput [type]="defaultType" 
+  [type]="defaultType" 
   (keyup.enter)="emitEnter()" 
   [(ngModel)]="value" 
   (paste)="emitValueWithCondition()" 

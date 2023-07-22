@@ -19,6 +19,7 @@
             placeholder="Your login password"
             [required]="true"
             styleWidth="100%"
+            [showVisibleSwitch]="true"
             ></app-mat-form-field-input>
         </li>
         <li><button mat-raised-button color="primary" style="width: 100%;" [disabled]="!validForm" (click)="login()">Login</button></li>
