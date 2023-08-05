@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AuthenticatorService } from '../shared/service/Authenticator.service';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-side-drawer',
@@ -7,6 +8,9 @@ import { AuthenticatorService } from '../shared/service/Authenticator.service';
   styleUrls: ['./side-drawer.component.scss']
 })
 export class SideDrawerComponent implements OnInit {
+
+  @Input()
+  matDrawer!: MatDrawer;
 
   constructor(public authenticatorService: AuthenticatorService) { }
 

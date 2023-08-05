@@ -1,4 +1,6 @@
 <ul>
+  <br>
+  <li><p align="right"><button mat-raised-button color="primary" (click)="matDrawer.toggle()"> ➥ </button></p></li>
   <hr>
   <li><app-mat-form-field-input-option
       label="Organization"
@@ -21,5 +23,10 @@
   <ul *ngIf="authenticatorService.isLoginB">
     <li><button mat-flat-button [routerLink]="['/organization/join']" routerLinkActive="router-link-active" >Join an organization</button></li>
     <li><button mat-flat-button [routerLink]="['/organization/create']" routerLinkActive="router-link-active" >Create an organization</button></li>
+  </ul>
+  <li><h1>Setting</h1></li>
+  <hr>
+  <ul>
+    <li><button mat-flat-button [routerLink]="['/organization/join']" routerLinkActive="router-link-active" >Setting</button></li>
   </ul>
 </ul>
