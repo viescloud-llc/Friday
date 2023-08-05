@@ -1,9 +1,96 @@
 <ul class="margin-center" appMatFormFieldGroup>
   <li><h1 style="color: aqua;" class="text-center">Create and Organization</h1></li>
+  <hr>
+  <li><h2 style="color: rgb(0, 255, 68);" class="text-center">Organization Profile</h2></li>
   <li>
     <app-mat-form-field-input
+    label="Name"
+    (valueOutput)="organizationProfile.name = $event"
     styleWidth="100%"
     [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Public email"
+    (valueOutput)="organizationProfile.publicEmail = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="timeZone"
+    value="EST"
+    (valueOutput)="organizationProfile.publicEmail = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Address"
+    (valueOutput)="organizationProfile.address = $event"
+    styleWidth="100%"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="City"
+    (valueOutput)="organizationProfile.city = $event"
+    styleWidth="100%"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="State"
+    (valueOutput)="organizationProfile.state = $event"
+    styleWidth="100%"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Zip-code"
+    [value]="0"
+    (valueOutput)="organizationProfile.zip = $event"
+    styleWidth="100%"
+    defaultType="number"
+    max="99999"
+    min="0"
+    ></app-mat-form-field-input>
+  </li>
+  <hr>
+  <li><h2 style="color: rgb(0, 255, 68);" class="text-center">Organization SMTP</h2></li>
+  <li>
+    <app-mat-form-field-input
+    label="Host"
+    (valueOutput)="smtp.host = $event"
+    styleWidth="100%"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Port"
+    [value]="80"
+    (valueOutput)="smtp.port = $event"
+    defaultType="number"
+    styleWidth="100%"
+    min="0"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Username"
+    (valueOutput)="smtp.username = $event"
+    styleWidth="100%"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Password"
+    (valueOutput)="smtp.password = $event"
+    styleWidth="100%"
+    [showVisibleSwitch]="true"
     ></app-mat-form-field-input>
   </li>
   <li>
