@@ -59,6 +59,13 @@
     min="0"
     ></app-mat-form-field-input>
   </li>
+  <li>
+    <app-mat-form-field-text-area
+    label="Organization description"
+    (valueOutput)="organizationProfile.bio = $event"
+    styleWidth="100%"
+    ></app-mat-form-field-text-area>
+  </li>
   <hr>
   <li><h2 style="color: rgb(0, 255, 68);" class="text-center">Organization SMTP</h2></li>
   <li>
