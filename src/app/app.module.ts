@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 
+export const defaultTextColor = 'black';
+
 @NgModule({
   declarations: [
     AppComponent,

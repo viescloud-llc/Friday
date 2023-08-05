@@ -27,6 +27,8 @@ export class RegisterComponent implements OnInit, AfterContentChecked {
 
   error: string = "";
 
+  action: string = 'join';
+
   constructor(
     private authenticatorService: AuthenticatorService, 
     private matDialog: MatDialog, 
@@ -63,7 +65,8 @@ export class RegisterComponent implements OnInit, AfterContentChecked {
 
     this.authenticatorService.postUser(user).pipe(first()).subscribe(
       res => {
-        let dialog = this.matDialog.open(ConfirmDialog, {data: {title: "Register Successful", message: "Do you want to auto login with registered information?\nAnd redirect to home?"}});
+        let message = this.action === 'join' ? 'organization Join page' : 'organization creation page';
+        let dialog = this.matDialog.open(ConfirmDialog, {data: {title: "Register Successful", message: `Thank you for registering\nYou will get redirect to ${message}`, no: ''}});
       
         dialog.afterClosed().pipe(first()).subscribe(
           res => {
@@ -80,7 +83,7 @@ export class RegisterComponent implements OnInit, AfterContentChecked {
   {
     this.authenticatorService.login(user).pipe(first()).subscribe(
       async res => {
-        await this.authenticatorService.autoUpdateUserWithJwt(res.jwt!); 
+        await this.authenticatorService.autoUpdateUserWithJwt(res.jwt!);
         this.router.navigate(['home'])
       },
       error => {this.error = 'invalid or wrong username or password'}

@@ -45,6 +45,15 @@
     ></app-mat-form-field-input>
   </li>
   <li>
+    <app-mat-form-field-input-option
+    label="I want to ___"
+    noneLabel=""
+    [value]="action" (valueOutput)="action = $event"
+    styleWidth="100%"
+    [options]="[{value: 'join', valueLabel: 'Join an organization'}, {value: 'create', valueLabel: 'Create an organization'}]"
+    ></app-mat-form-field-input-option>
+  </li>
+  <li>
     <button mat-raised-button color="primary" style="width: 100%;" [disabled]="!validForm" (click)="register()">Register</button>
   </li>
   <h3>Need to <a routerLink="/login">login</a> ?</h3>
