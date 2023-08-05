@@ -5,6 +5,7 @@
   label="Input"
   [value]="input" (valueOutput)="input = $event.toString()"
   [autoResize]="true"
+  styleWidth="100%"
   ></app-mat-form-field-input>
   <app-mat-form-field-text-area
   *ngIf="data.multipleLine"
@@ -12,6 +13,7 @@
   [value]="input" (valueOutput)="input = $event.toString()"
   cols="50"
   rows="10"
+  styleWidth="100%"
   ></app-mat-form-field-text-area>
 </div>
 <div mat-dialog-actions>
