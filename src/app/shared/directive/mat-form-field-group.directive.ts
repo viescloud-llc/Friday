@@ -59,4 +59,12 @@ export class MatFormFieldGroupDirective implements AfterContentInit, AfterConten
     this.onAllInputCheck.emit(valid);
     return valid;
   }
+
+  emitAllValueOutput(): void {
+    if(this.matFormFields) {
+      this.matFormFields.forEach(e => {
+        e.emitValue();
+      });
+    }
+  }
 }

@@ -52,12 +52,20 @@
     <app-mat-form-field-input
     label="Zip-code"
     [value]="0"
-    (valueOutput)="organizationProfile.zip = $event"
+    (valueOutput)="organizationProfile.zip = +$event"
     styleWidth="100%"
     defaultType="number"
     max="99999"
     min="0"
     ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-list-input
+    label="Social Media Link"
+    [value]="organizationProfile.socialMedias!"
+    inputType="string"
+    ></app-mat-form-field-list-input>
+    <br>
   </li>
   <li>
     <app-mat-form-field-text-area

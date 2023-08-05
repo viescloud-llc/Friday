@@ -1,4 +1,4 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { MatFormFieldComponent } from '../mat-form-field/mat-form-field.component';
@@ -81,6 +81,13 @@ export class MatFormFieldInputComponent extends MatFormFieldComponent {
   formControl!: FormControl;
   filteredOptions!: Observable<string[]>;
 
+  //custom icon
+  @Output()
+  onCustomIconClick: EventEmitter<any> = new EventEmitter();
+
+  @Input()
+  customIconLabel: string = '';
+
   constructor() {
     super();
   }
@@ -95,8 +102,11 @@ export class MatFormFieldInputComponent extends MatFormFieldComponent {
     );
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  private _filter(value: any): string[] {
+    let filterValue = value;
+
+    if(typeof filterValue === 'string')
+      filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
@@ -118,6 +128,11 @@ export class MatFormFieldInputComponent extends MatFormFieldComponent {
 
     this.valueOutput.emit(value);
     this.onValueChange.emit();
+  }
+
+  emitCustomIcon() {
+    this.emitValue();
+    this.onCustomIconClick.emit(this.value);
   }
 
   override isValidInput(): boolean {

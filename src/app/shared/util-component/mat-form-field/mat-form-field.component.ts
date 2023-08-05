@@ -143,4 +143,8 @@ export class MatFormFieldComponent implements OnInit, OnChanges {
   isValueNumber(): boolean {
     return typeof this.value === 'number';
   }
+
+  resetValue(): void {
+    this.value = structuredClone(this.valueCopy);
+  }
 }

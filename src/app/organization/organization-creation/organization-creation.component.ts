@@ -9,7 +9,7 @@ import { Organization, OrganizationProfile, SMTP } from 'src/app/shared/model/Or
 })
 export class OrganizationCreationComponent extends FixChangeDetection implements OnInit {
 
-  organizationProfile: OrganizationProfile = {};
+  organizationProfile: OrganizationProfile = {socialMedias: []};
   smtp: SMTP = {};
   
   constructor() {
