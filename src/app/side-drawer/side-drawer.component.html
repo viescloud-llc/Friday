@@ -9,11 +9,17 @@
   </li>
   <li><h1>Dashboard</h1></li>
   <hr>
-  <li><button mat-flat-button [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</button></li>
-  <li><button *ngIf="!authenticatorService.isLoginB" mat-flat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</button></li>
-  <li><button *ngIf="authenticatorService.isLoginB" mat-flat-button (click)="authenticatorService.logout()" >Logout</button></li>
-  <li><button *ngIf="!authenticatorService.isLoginB" mat-flat-button [routerLink]="['/register']" routerLinkActive="router-link-active" >Register</button></li>
+  <ul>
+    <li><button mat-flat-button [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</button></li>
+    <li><button *ngIf="!authenticatorService.isLoginB" mat-flat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</button></li>
+    <li><button *ngIf="authenticatorService.isLoginB" mat-flat-button (click)="authenticatorService.logout()" >Logout</button></li>
+    <li><button *ngIf="!authenticatorService.isLoginB" mat-flat-button [routerLink]="['/register']" routerLinkActive="router-link-active" >Register</button></li>
+  </ul>
   <br>
   <li><h1>Utility</h1></li>
   <hr>
+  <ul *ngIf="authenticatorService.isLoginB">
+    <li><button mat-flat-button [routerLink]="['/organization/join']" routerLinkActive="router-link-active" >Join an organization</button></li>
+    <li><button mat-flat-button [routerLink]="['/organization/create']" routerLinkActive="router-link-active" >Create an organization</button></li>
+  </ul>
 </ul>

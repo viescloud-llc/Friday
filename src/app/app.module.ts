@@ -11,6 +11,7 @@ import { SideDrawerComponent } from './side-drawer/side-drawer.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { OrganizationCreationComponent } from './organization/organization-creation/organization-creation.component';
 
 export const defaultTextColor = 'black';
 
@@ -21,7 +22,8 @@ export const defaultTextColor = 'black';
     SideDrawerComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    OrganizationCreationComponent
   ],
   imports: [
     NgEssentialModule,
