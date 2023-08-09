@@ -33,12 +33,22 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
     this.listLength = this.value.length;
   }
 
+  override isValidInput(): boolean {
+    let superCheck = super.isValidInput();
+    if(!superCheck)
+      return superCheck;
+    else
+      return this.validForm;
+  }
+
   updateListLength() {
     while(this.value.length < this.listLength)
       this.value.push(this.inputType === 'object' ? {} : '');
 
-    while(this.value.length > this.listLength) 
-      this.value = this.value.splice(this.value.length - 1, 1);
+    if(this.value.length > this.listLength) {
+      let deleteSize = this.value.length - this.listLength
+      this.value.splice(this.listLength - 1, deleteSize);
+    }
     
     this.listLength = this.value.length;
   }
@@ -55,4 +65,9 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
   remove(value: any): void {
     this.value = this.value.filter(e => JSON.stringify(e) !== JSON.stringify(value));
   }
+
+  trackByIndex(index: number, obj: any): any {
+    return index;
+  }
+
 }

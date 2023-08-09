@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { MatFormFieldComponent } from '../mat-form-field/mat-form-field.component';
@@ -48,6 +48,9 @@ export class MatFormFieldInputComponent extends MatFormFieldComponent {
 
   @Input()
   manuallyEmitValue: boolean = false;
+
+  @Input()
+  focusoutEmit: boolean = true;
 
   //input copy
   @Input()
@@ -112,7 +115,7 @@ export class MatFormFieldInputComponent extends MatFormFieldComponent {
   }
 
   override emitValue(): void {
-    let value = this.value;
+    let value = structuredClone(this.value);
 
     if (this.alwayLowercase && typeof value === 'string')
       value = value.toLowerCase();
@@ -128,6 +131,11 @@ export class MatFormFieldInputComponent extends MatFormFieldComponent {
 
     this.valueOutput.emit(value);
     this.onValueChange.emit();
+  }
+
+  focusoutEmitValue() {
+    if(this.focusoutEmit)
+      this.emitValue();
   }
 
   emitCustomIcon() {

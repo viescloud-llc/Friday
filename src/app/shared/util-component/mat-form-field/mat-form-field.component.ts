@@ -84,7 +84,7 @@ export class MatFormFieldComponent implements OnInit, OnChanges {
   }
 
   isValidInput(): boolean {
-    if (this.required && this.value === '')
+    if (this.required && !this.value)
       return false;
 
     if(this.internalError)

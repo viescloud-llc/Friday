@@ -21,17 +21,18 @@
       styleWidth="100%"
       [manuallyEmitValue]="true"
       [showClearIcon]="false"
+      [focusoutEmit]="false"
       ></app-mat-form-field-input>
     </li>
-    <li *ngFor="let item of value; let i = index">
+    <li *ngFor="let item of value; let i = index; trackBy: trackByIndex;">
       <app-mat-form-field-input
-      [label]="label"
-      [value]="item" (valueOutput)="value[i] = clone($event)"
+      [label]="label + ' ' + (i + 1)"
+      [value]="item" (valueOutput)="value[i] = $event"
       styleWidth="100%"
-      [manuallyEmitValue]="true"
-      [required]="true"
+      [required]="required"
       customIconLabel="remove_circle"
       (onCustomIconClick)="remove($event)"
+      [disable]="true"
       ></app-mat-form-field-input>
       <hr>
     </li>
