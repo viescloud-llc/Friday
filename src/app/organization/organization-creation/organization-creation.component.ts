@@ -9,6 +9,8 @@ import { Organization, OrganizationProfile, SMTP } from 'src/app/shared/model/Or
 })
 export class OrganizationCreationComponent extends FixChangeDetection implements OnInit {
 
+  validForm: boolean = false;
+
   organizationProfile: OrganizationProfile = {socialMedias: []};
   smtp: SMTP = {};
   

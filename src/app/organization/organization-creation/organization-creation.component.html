@@ -1,4 +1,4 @@
-<ul class="margin-center" appMatFormFieldGroup>
+<ul class="margin-center" appMatFormFieldGroup (onAllInputCheck)="validForm = $event">
   <li><h1 style="color: aqua;" class="text-center">Create and Organization</h1></li>
   <hr>
   <li><h2 style="color: rgb(0, 255, 68);" class="text-center">Organization Profile</h2></li>
@@ -32,6 +32,7 @@
     label="Address"
     (valueOutput)="organizationProfile.address = $event"
     styleWidth="100%"
+    [required]="true"
     ></app-mat-form-field-input>
   </li>
   <li>
@@ -39,6 +40,7 @@
     label="City"
     (valueOutput)="organizationProfile.city = $event"
     styleWidth="100%"
+    [required]="true"
     ></app-mat-form-field-input>
   </li>
   <li>
@@ -46,6 +48,7 @@
     label="State"
     (valueOutput)="organizationProfile.state = $event"
     styleWidth="100%"
+    [required]="true"
     ></app-mat-form-field-input>
   </li>
   <li>
@@ -57,6 +60,7 @@
     defaultType="number"
     max="99999"
     min="0"
+    [required]="true"
     ></app-mat-form-field-input>
   </li>
   <li>
@@ -64,12 +68,13 @@
     label="Social Media Link"
     [value]="organizationProfile.socialMedias!"
     inputType="string"
+    [showSizeInput]="false"
     ></app-mat-form-field-list-input>
     <br>
   </li>
   <li>
     <app-mat-form-field-text-area
-    label="Organization description"
+    label="Description"
     (valueOutput)="organizationProfile.bio = $event"
     styleWidth="100%"
     ></app-mat-form-field-text-area>
@@ -109,6 +114,6 @@
     ></app-mat-form-field-input>
   </li>
   <li>
-    <button mat-raised-button color="primary" style="width: 100%;">Create Organization</button>
+    <button mat-raised-button color="primary" style="width: 100%;" [disabled]="!validForm">Create Organization</button>
   </li>
 </ul>
