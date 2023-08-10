@@ -45,6 +45,14 @@ textarea
     }
 }
 
+@media screen and (max-width: 280px)
+{
+    *
+    {
+        font-size: x-small;
+    }
+}
+
 ul
 {
     list-style: none;

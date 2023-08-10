@@ -5,8 +5,9 @@
   <li><app-mat-form-field-input-option
       label="Organization"
       styleWidth="100%"
-      noneLabel=""
-      [options]="[{value: 'something', valueLabel: 'org'}]"
+      noneLabel="Please select your Organization"
+      [options]="options"
+      (opened)="updateOrganizationList()"
       ></app-mat-form-field-input-option>
   </li>
   <li><h1>Dashboard</h1></li>

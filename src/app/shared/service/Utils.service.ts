@@ -69,4 +69,12 @@ export class UtilsService {
       };
     });
   }
+
+  static isNotEqual(obj1: any, obj2: any) {
+    return JSON.stringify(obj1) !== JSON.stringify(obj2);
+  }
+
+  static isEqual(obj1: any, obj2: any) {
+    return JSON.stringify(obj1) === JSON.stringify(obj2);
+  }
 }
