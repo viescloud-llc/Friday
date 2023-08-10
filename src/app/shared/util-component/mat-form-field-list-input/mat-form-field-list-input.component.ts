@@ -20,6 +20,9 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
   
   @Input()
   showSizeInput: boolean = true;
+  
+  @Input()
+  maxSize: number = 10;
 
   listLength!: number;
 
@@ -42,6 +45,9 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
   }
 
   updateListLength() {
+    if(this.reachMaxSize())
+      this.listLength = this.maxSize;
+
     while(this.value.length < this.listLength)
       this.value.push(this.inputType === 'object' ? {} : '');
 
@@ -54,7 +60,8 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
   }
 
   addNewItem() {
-    this.value.push(this.inputType === 'object' ? {} : '');
+    if(!this.reachMaxSize())
+      this.value.push(this.inputType === 'object' ? {} : '');
     this.listLength = this.value.length;
   }
 
@@ -62,12 +69,16 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
     return structuredClone(obj);
   }
 
-  remove(value: any): void {
-    this.value = this.value.filter(e => JSON.stringify(e) !== JSON.stringify(value));
+  remove(index: number): void {
+    this.value.splice(index, 1);
   }
 
   trackByIndex(index: number, obj: any): any {
     return index;
+  }
+
+  reachMaxSize(): boolean {
+    return this.value.length >= this.maxSize;
   }
 
 }

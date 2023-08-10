@@ -17,6 +17,7 @@
       defaultType="number"
       [showMinMaxHint]="true"
       min="0"
+      [max]="maxSize.toString()"
       [required]="true"
       styleWidth="100%"
       [manuallyEmitValue]="true"
@@ -31,11 +32,11 @@
       styleWidth="100%"
       [required]="required"
       customIconLabel="remove_circle"
-      (onCustomIconClick)="remove($event)"
+      (onCustomIconClick)="remove(i)"
       [disable]="true"
       ></app-mat-form-field-input>
       <hr>
     </li>
-    <li><button mat-raised-button color="primary" style="width: 100%;" (click)="addNewItem()">Add new {{label}}</button></li>
+    <li><button mat-raised-button color="primary" style="width: 100%;" (click)="addNewItem()" [disabled]="reachMaxSize()">Add new {{label}}</button></li>
   </ul>
 </mat-expansion-panel>
