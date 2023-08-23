@@ -10,7 +10,7 @@
         noneLabel="Please select your Organization"
         [options]="options"
         (opened)="updateOrganizationList()"
-        (selectionChange)="organizationService.selectedOrganization = $event"
+        (selectionChange)="organizationService.selectedOrganizationId = $event"
         ></app-mat-form-field-input-option>
     </li>
   </ng-container>
@@ -28,10 +28,10 @@
     <li><h1>Organization</h1></li>
     <hr>
     <ul>
-      <ng-container *ngIf="organizationService.selectedOrganization">
+      <ng-container *ngIf="organizationService.selectedOrganizationId">
         <li><button mat-flat-button [routerLink]="['/organization/profile']" routerLinkActive="router-link-active" >Profile</button></li>
       </ng-container>
-      <ng-container *ngIf="!organizationService.selectedOrganization">
+      <ng-container *ngIf="!organizationService.selectedOrganizationId">
         <li><button mat-flat-button [routerLink]="['/organization/join']" routerLinkActive="router-link-active" >Join</button></li>
         <li><button mat-flat-button [routerLink]="['/organization/create']" routerLinkActive="router-link-active" >Create</button></li>
       </ng-container>

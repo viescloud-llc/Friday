@@ -35,8 +35,13 @@ const routes: Routes = [
         component: OrganizationJoinComponent
       },
       {
-        path: 'profile',
-        component: OrganizationProfileComponent
+        path: ':id',
+        children: [
+          {
+            path: 'profile',
+            component: OrganizationProfileComponent
+          }
+        ]
       }
     ]
   },

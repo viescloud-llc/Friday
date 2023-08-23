@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs';
 
 export interface File {
   name: string,
@@ -14,6 +16,18 @@ export interface File {
 export class UtilsService {
 
   constructor() { }
+
+  static async getRouteParam(route: ActivatedRoute, variable: string): Promise<string> {
+    return new Promise<string>((resolve, reject) => {
+      route.params.pipe(first()).subscribe(
+        params => {
+          let value = params[variable];
+          resolve(value);
+        },
+        error => { reject('') }
+      );
+    })
+  }
 
   patch(object: any, target: any): void {
     if (typeof object !== typeof target || JSON.stringify(object) !== JSON.stringify(target))
@@ -61,7 +75,7 @@ export class UtilsService {
             value: value,
             extension: extension
           }
-          
+
           fileInput.remove();
           resolve(file);
         };

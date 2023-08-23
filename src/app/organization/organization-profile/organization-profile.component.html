@@ -1,6 +1,90 @@
-<ul class="margin-center">
+<p>
+  profile work
+</p>
+<ul class="margin-center" *ngIf="organization && organization.organizationProfile">
   <li><h1 class="text-center" style="color: blueviolet;">Organization Profile</h1></li>
   <li>
-    
+    <app-mat-form-field-input
+    label="Name"
+    [value]="organization.organizationProfile!.name ?? ''"
+    (valueOutput)="organization.organizationProfile!.name = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Public email"
+    [value]="organization.organizationProfile!.publicEmail ?? ''"
+    (valueOutput)="organization.organizationProfile!.publicEmail = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="timeZone"
+    value="EST"
+    [value]="organization.organizationProfile!.timeZone ?? ''"
+    (valueOutput)="organization.organizationProfile!.timeZone = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Address"
+    [value]="organization.organizationProfile!.address ?? ''"
+    (valueOutput)="organization.organizationProfile!.address = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="City"
+    [value]="organization.organizationProfile!.city ?? ''"
+    (valueOutput)="organization.organizationProfile!.city = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="State"
+    [value]="organization.organizationProfile!.state?? ''"
+    (valueOutput)="organization.organizationProfile!.state = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Zip-code"
+    [value]="0"
+    (valueOutput)="organization.organizationProfile!.zip = +$event"
+    styleWidth="100%"
+    defaultType="number"
+    max="99999"
+    min="0"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-list-input
+    label="Social Media Link"
+    [value]="organization.organizationProfile!.socialMedias!"
+    inputType="string"
+    [showSizeInput]="false"
+    ></app-mat-form-field-list-input>
+    <br>
+  </li>
+  <li>
+    <app-mat-form-field-text-area
+    label="Description"
+    [value]="organization.organizationProfile!.bio?? ''"
+    (valueOutput)="organization.organizationProfile!.bio = $event"
+    styleWidth="100%"
+    ></app-mat-form-field-text-area>
   </li>
 </ul>
