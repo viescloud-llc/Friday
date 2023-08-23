@@ -1,3 +1,21 @@
-<p>
-  organization-join works!
-</p>
+<ul class="margin-center" appMatFormFieldGroup (onAllInputCheck)="validForm = $event">
+  <li>
+    <h1 class="text-center" style="color: blue;">Join an organization</h1>
+  </li>
+  <li>
+    <h3>Know your organization ID number?</h3>
+    <app-mat-form-field-input
+    label="Organization ID"
+    (valueOutput)="organizationId = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <button mat-raised-button color="primary" style="width: 100%;" [disabled]="!validForm">Join</button>
+  </li>
+  <li>
+    <hr>
+    <h4>Please contact your organization owner if you don't have the organization id</h4>
+  </li>
+</ul>

@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrganizationJoinComponent implements OnInit {
 
+  organizationId: string = '';
+
+  validForm: boolean = false;
+
   constructor() { }
 
   ngOnInit() {
