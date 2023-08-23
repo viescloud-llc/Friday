@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { OrganizationCreationComponent } from './organization/organization-creation/organization-creation.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { OrganizationJoinComponent } from './organization/organization-join/organization-join.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'create',
         component: OrganizationCreationComponent
+      },
+      {
+        path: 'join',
+        component: OrganizationJoinComponent
       }
     ]
   },

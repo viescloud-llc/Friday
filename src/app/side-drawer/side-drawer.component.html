@@ -1,33 +1,41 @@
 <ul>
-  <br>
-  <li><p align="right"><button mat-raised-button color="primary" (click)="matDrawer.toggle()"> ➥ </button></p></li>
-  <hr>
-  <li><app-mat-form-field-input-option
-      label="Organization"
-      styleWidth="100%"
-      noneLabel="Please select your Organization"
-      [options]="options"
-      (opened)="updateOrganizationList()"
-      ></app-mat-form-field-input-option>
-  </li>
-  <li><h1>Dashboard</h1></li>
-  <hr>
-  <ul>
-    <li><button mat-flat-button [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</button></li>
-    <li><button *ngIf="!authenticatorService.isLoginB" mat-flat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</button></li>
-    <li><button *ngIf="authenticatorService.isLoginB" mat-flat-button (click)="authenticatorService.logout()" >Logout</button></li>
-    <li><button *ngIf="!authenticatorService.isLoginB" mat-flat-button [routerLink]="['/register']" routerLinkActive="router-link-active" >Register</button></li>
-  </ul>
-  <br>
-  <li><h1>Utility</h1></li>
-  <hr>
-  <ul *ngIf="authenticatorService.isLoginB">
-    <li><button mat-flat-button [routerLink]="['/organization/join']" routerLinkActive="router-link-active" >Join an organization</button></li>
-    <li><button mat-flat-button [routerLink]="['/organization/create']" routerLinkActive="router-link-active" >Create an organization</button></li>
-  </ul>
-  <li><h1>Setting</h1></li>
-  <hr>
-  <ul>
-    <li><button mat-flat-button [routerLink]="['/organization/join']" routerLinkActive="router-link-active" >Setting</button></li>
-  </ul>
+  <ng-container >
+    <br>
+    <li><p align="right"><button mat-raised-button color="primary" (click)="matDrawer.toggle()"> ➥ </button></p></li>
+    <hr>
+    <li *ngIf="authenticatorService.isLoginB">
+        <app-mat-form-field-input-option
+        label="Organization"
+        styleWidth="100%"
+        noneLabel="Please select your Organization"
+        [options]="options"
+        (opened)="updateOrganizationList()"
+        ></app-mat-form-field-input-option>
+    </li>
+  </ng-container>
+  <ng-container >
+    <li><h1>Dashboard</h1></li>
+    <hr>
+    <ul>
+      <li><button mat-flat-button [routerLink]="['/home']" routerLinkActive="router-link-active" >Home</button></li>
+      <li><button *ngIf="!authenticatorService.isLoginB" mat-flat-button [routerLink]="['/login']" routerLinkActive="router-link-active" >Login</button></li>
+      <li><button *ngIf="authenticatorService.isLoginB" mat-flat-button (click)="authenticatorService.logout()" >Logout</button></li>
+      <li><button *ngIf="!authenticatorService.isLoginB" mat-flat-button [routerLink]="['/register']" routerLinkActive="router-link-active" >Register</button></li>
+    </ul>
+  </ng-container>
+  <ng-container *ngIf="authenticatorService.isLoginB">
+    <li><h1>Utility</h1></li>
+    <hr>
+    <ul>
+      <li><button mat-flat-button [routerLink]="['/organization/join']" routerLinkActive="router-link-active" >Join an organization</button></li>
+      <li><button mat-flat-button [routerLink]="['/organization/create']" routerLinkActive="router-link-active" >Create an organization</button></li>
+    </ul>
+  </ng-container>
+  <ng-container *ngIf="authenticatorService.isLoginB">
+    <li><h1>Setting</h1></li>
+    <hr>
+    <ul>
+      <li><button mat-flat-button [routerLink]="['/organization/join']" routerLinkActive="router-link-active" >Setting</button></li>
+    </ul>
+  </ng-container>
 </ul>
