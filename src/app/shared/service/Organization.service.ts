@@ -21,7 +21,7 @@ export class OrganizationService {
     return this.httpClient.get<Organization[]>(`${this.settingService.getGatewayUrl()}/${this.prefix}/organizations`);
   }
 
-  public getOrganization(id: number): Observable<Organization> {
+  public getOrganization(id: string): Observable<Organization> {
     return this.httpClient.get<Organization>(`${this.settingService.getGatewayUrl()}/${this.prefix}/organizations/${id}`);
   }
 

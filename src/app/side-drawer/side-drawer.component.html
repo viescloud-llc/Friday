@@ -29,7 +29,7 @@
     <hr>
     <ul>
       <ng-container *ngIf="organizationService.selectedOrganizationId">
-        <li><button mat-flat-button [routerLink]="['/organization/profile']" routerLinkActive="router-link-active" >Profile</button></li>
+        <li><button mat-flat-button [routerLink]="['organization', organizationService.selectedOrganizationId, 'profile']" routerLinkActive="router-link-active" >Profile</button></li>
       </ng-container>
       <ng-container *ngIf="!organizationService.selectedOrganizationId">
         <li><button mat-flat-button [routerLink]="['/organization/join']" routerLinkActive="router-link-active" >Join</button></li>

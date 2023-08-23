@@ -14,6 +14,8 @@ export class OrganizationProfileComponent implements OnInit {
 
   organization!: Organization;
 
+  validForm: boolean = false;
+
   constructor(
     private organizationService: OrganizationService,
     private router: Router,
@@ -23,9 +25,11 @@ export class OrganizationProfileComponent implements OnInit {
   async ngOnInit() {
     let id = await UtilsService.getRouteParam(this.activatedRoute, 'id');
 
-    if(this.organizationService.selectedOrganizationId) {
-      this.organizationService.getOrganization(this.organizationService.selectedOrganizationId).pipe(first()).subscribe(
-        
+    if(id) {
+      this.organizationService.getOrganization(id).pipe(first()).subscribe(
+        res => {
+          this.organization = res;
+        }
       );
     }
     else

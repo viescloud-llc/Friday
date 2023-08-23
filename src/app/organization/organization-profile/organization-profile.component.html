@@ -1,8 +1,14 @@
-<p>
-  profile work
-</p>
-<ul class="margin-center" *ngIf="organization && organization.organizationProfile">
+<ul class="margin-center" *ngIf="organization && organization.organizationProfile" appMatFormFieldGroup (onAllInputCheck)="validForm = $event">
   <li><h1 class="text-center" style="color: blueviolet;">Organization Profile</h1></li>
+  <li>
+    <app-mat-form-field-input
+    label="ID"
+    [value]="organization.id"
+    styleWidth="100%"
+    [disable]="true"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
   <li>
     <app-mat-form-field-input
     label="Name"
@@ -24,7 +30,6 @@
   <li>
     <app-mat-form-field-input
     label="timeZone"
-    value="EST"
     [value]="organization.organizationProfile!.timeZone ?? ''"
     (valueOutput)="organization.organizationProfile!.timeZone = $event"
     styleWidth="100%"
@@ -86,5 +91,8 @@
     (valueOutput)="organization.organizationProfile!.bio = $event"
     styleWidth="100%"
     ></app-mat-form-field-text-area>
+  </li>
+  <li>
+    <button mat-raised-button color="primary" style="width: 100%;" [disabled]="!validForm">Update Profile</button>
   </li>
 </ul>
