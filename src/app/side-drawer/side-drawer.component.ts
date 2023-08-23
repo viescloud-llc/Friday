@@ -22,7 +22,7 @@ export class SideDrawerComponent implements OnInit {
 
   constructor(
     public authenticatorService: AuthenticatorService,
-    private organizationService: OrganizationService
+    public organizationService: OrganizationService
     ) { }
 
   ngOnInit() {

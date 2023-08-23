@@ -10,6 +10,7 @@ import { SettingService } from './Setting.service';
 export class OrganizationService {
 
   private prefix = "saturday"
+  selectedOrganization?: Organization;
 
   constructor(
     private httpClient: HttpClient,
