@@ -6,6 +6,7 @@ import { Organization } from '../shared/model/Organization.model';
 import { first } from 'rxjs';
 import { MatOption } from '../shared/model/Mat.model';
 import { UtilsService } from '../shared/service/Utils.service';
+import { Router } from '@angular/router';
 
 const KEY = "SelectedOrganizationId";
 
@@ -24,7 +25,8 @@ export class SideDrawerComponent implements OnInit {
 
   constructor(
     public authenticatorService: AuthenticatorService,
-    public organizationService: OrganizationService
+    public organizationService: OrganizationService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -59,5 +61,6 @@ export class SideDrawerComponent implements OnInit {
   selectionChange(value: any): void {
     this.organizationService.selectedOrganizationId = value;
     UtilsService.localStorageSetItem(KEY, value);
+    this.router.navigate(['organization', value, 'home']);
   }
 }

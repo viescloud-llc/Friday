@@ -30,6 +30,7 @@
     <hr>
     <ul>
       <ng-container *ngIf="organizationService.selectedOrganizationId">
+        <li><button mat-flat-button [routerLink]="['organization', organizationService.selectedOrganizationId, 'home']" routerLinkActive="router-link-active" >Home</button></li>
         <li><button mat-flat-button [routerLink]="['organization', organizationService.selectedOrganizationId, 'profile']" routerLinkActive="router-link-active" >Profile</button></li>
       </ng-container>
       <ng-container *ngIf="!organizationService.selectedOrganizationId">

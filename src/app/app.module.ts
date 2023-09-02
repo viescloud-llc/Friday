@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { OrganizationCreationComponent } from './organization/organization-creation/organization-creation.component';
 import { OrganizationJoinComponent } from './organization/organization-join/organization-join.component';
 import { OrganizationProfileComponent } from './organization/organization-profile/organization-profile.component';
+import { OrganizationHomeComponent } from './organization/organization-home/organization-home.component';
 
 export const defaultTextColor = 'black';
 
@@ -27,7 +28,8 @@ export const defaultTextColor = 'black';
     LoginComponent,
     OrganizationCreationComponent,
     OrganizationJoinComponent,
-    OrganizationProfileComponent
+    OrganizationProfileComponent,
+    OrganizationHomeComponent
   ],
   imports: [
     NgEssentialModule,

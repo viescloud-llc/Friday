@@ -7,6 +7,7 @@ import { OrganizationCreationComponent } from './organization/organization-creat
 import { AuthGuard } from './shared/guards/auth.guard';
 import { OrganizationJoinComponent } from './organization/organization-join/organization-join.component';
 import { OrganizationProfileComponent } from './organization/organization-profile/organization-profile.component';
+import { OrganizationHomeComponent } from './organization/organization-home/organization-home.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
       {
         path: ':id',
         children: [
+          {
+            path: 'home',
+            component: OrganizationHomeComponent
+          },
           {
             path: 'profile',
             component: OrganizationProfileComponent
