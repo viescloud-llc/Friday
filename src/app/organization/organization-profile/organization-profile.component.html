@@ -93,6 +93,7 @@
     ></app-mat-form-field-text-area>
   </li>
   <li>
-    <button mat-raised-button color="primary" style="width: 100%;" [disabled]="!validForm">Update Profile</button>
+    <button mat-raised-button color="primary" style="width: 50%;" [disabled]="!validUpdate()" (click)="updateProfile()">Update Profile</button>
+    <button mat-raised-button color="warn" style="width: 50%;" [disabled]="!isNotEqual()" (click)="reverse()">Reverse</button>
   </li>
 </ul>

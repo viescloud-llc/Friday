@@ -91,4 +91,18 @@ export class UtilsService {
   static isEqual(obj1: any, obj2: any) {
     return JSON.stringify(obj1) === JSON.stringify(obj2);
   }
+
+  static localStorageSetItem(key: string, value: any): void {
+    localStorage.setItem(key, JSON.stringify(value))
+  }
+
+  static localStorageGetItem<T>(key: string): T | null {
+    let value = localStorage.getItem(key);
+    if(value) {
+      let parseValue: T = JSON.parse(value);
+      return parseValue;
+    }
+
+    return null;
+  }
 }
