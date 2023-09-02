@@ -8,6 +8,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { OrganizationJoinComponent } from './organization/organization-join/organization-join.component';
 import { OrganizationProfileComponent } from './organization/organization-profile/organization-profile.component';
 import { OrganizationHomeComponent } from './organization/organization-home/organization-home.component';
+import { OrganizationSmtpComponent } from './organization/organization-smtp/organization-smtp.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
           {
             path: 'profile',
             component: OrganizationProfileComponent
+          },
+          {
+            path: 'smtp',
+            component: OrganizationSmtpComponent
           }
         ]
       }

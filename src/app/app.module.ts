@@ -15,21 +15,31 @@ import { OrganizationCreationComponent } from './organization/organization-creat
 import { OrganizationJoinComponent } from './organization/organization-join/organization-join.component';
 import { OrganizationProfileComponent } from './organization/organization-profile/organization-profile.component';
 import { OrganizationHomeComponent } from './organization/organization-home/organization-home.component';
+import { OrganizationSmtpComponent } from './organization/organization-smtp/organization-smtp.component';
 
 export const defaultTextColor = 'black';
 
+const DASH_BOARD = [
+  AppComponent,
+  HeaderComponent,
+  SideDrawerComponent,
+  HomeComponent,
+  RegisterComponent,
+  LoginComponent
+]
+
+const ORGANIZATION = [
+  OrganizationCreationComponent,
+  OrganizationJoinComponent,
+  OrganizationProfileComponent,
+  OrganizationHomeComponent,
+  OrganizationSmtpComponent
+]
+
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    SideDrawerComponent,
-    HomeComponent,
-    RegisterComponent,
-    LoginComponent,
-    OrganizationCreationComponent,
-    OrganizationJoinComponent,
-    OrganizationProfileComponent,
-    OrganizationHomeComponent
+    ... DASH_BOARD,
+    ... ORGANIZATION
   ],
   imports: [
     NgEssentialModule,
