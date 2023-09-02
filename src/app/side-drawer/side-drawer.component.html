@@ -6,11 +6,12 @@
     <li *ngIf="authenticatorService.isLoginB">
         <app-mat-form-field-input-option
         label="Organization"
+        [value]="organizationService.selectedOrganizationId ?? ''"
         styleWidth="100%"
         noneLabel="Please select your Organization"
         [options]="options"
         (opened)="updateOrganizationList()"
-        (selectionChange)="organizationService.selectedOrganizationId = $event"
+        (selectionChange)="selectionChange($event)"
         ></app-mat-form-field-input-option>
     </li>
   </ng-container>

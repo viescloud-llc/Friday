@@ -7,6 +7,8 @@ import { first } from 'rxjs';
 import { MatOption } from '../shared/model/Mat.model';
 import { UtilsService } from '../shared/service/Utils.service';
 
+const KEY = "SelectedOrganizationId";
+
 @Component({
   selector: 'app-side-drawer',
   templateUrl: './side-drawer.component.html',
@@ -43,12 +45,19 @@ export class SideDrawerComponent implements OnInit {
   updateOrganizationOptions(): void {
     if(!this.organizations) 
       return;
-      
+    
     let options: MatOption[] = [];
     this.organizations.forEach(e => options.push({value: e.id!, valueLabel: e.organizationProfile!.name!}))
     if(UtilsService.isNotEqual(this.options, options))
       this.options = options;
+
+    let cacheSelectedId = UtilsService.localStorageGetItem<string>(KEY);
+    if(cacheSelectedId)
+      this.organizationService.selectedOrganizationId = cacheSelectedId;
   }
 
-  
+  selectionChange(value: any): void {
+    this.organizationService.selectedOrganizationId = value;
+    UtilsService.localStorageSetItem(KEY, value);
+  }
 }
