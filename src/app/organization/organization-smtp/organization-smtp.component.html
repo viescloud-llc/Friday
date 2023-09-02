@@ -1,3 +1,46 @@
-<p>
-  organization-smtp works!
-</p>
+<ul class="margin-center" *ngIf="organization && organization.organizationProfile" appMatFormFieldGroup (onAllInputCheck)="validForm = $event">
+  <li><h1 class="text-center">SMTP</h1></li>
+  <li>
+    <app-mat-form-field-input
+    label="Host"
+    [value]="organization.smtp!.host ?? ''"
+    (valueOutput)="organization.smtp!.host = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Port"
+    [value]="organization.smtp!.port"
+    (valueOutput)="organization.smtp!.port = $event"
+    defaultType="number"
+    styleWidth="100%"
+    min="0"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Username"
+    [value]="organization.smtp!.username?? ''"
+    (valueOutput)="organization.smtp!.username = $event"
+    styleWidth="100%"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <app-mat-form-field-input
+    label="Password"
+    [value]="organization.smtp!.password?? ''"
+    (valueOutput)="organization.smtp!.password = $event"
+    styleWidth="100%"
+    [showVisibleSwitch]="true"
+    [required]="true"
+    ></app-mat-form-field-input>
+  </li>
+  <li>
+    <button mat-raised-button color="primary" style="width: 50%;" [disabled]="!validUpdate()" (click)="patchProfile()">Update Profile</button>
+    <button mat-raised-button color="warn" style="width: 50%;" [disabled]="!isNotEqual()" (click)="reverse()">Reverse</button>
+  </li>
+</ul>

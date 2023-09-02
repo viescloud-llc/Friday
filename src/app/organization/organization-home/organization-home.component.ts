@@ -21,6 +21,8 @@ export class OrganizationHomeComponent extends FixChangeDetection implements OnI
 
   validForm: boolean = false;
 
+
+
   constructor(
     private organizationService: OrganizationService,
     private router: Router,
@@ -75,12 +77,12 @@ export class OrganizationHomeComponent extends FixChangeDetection implements OnI
           this.organization = res;
           this.organizationCopy = structuredClone(this.organization);
 
-          let dialog = this.matDialog.open(ConfirmDialog, { data: { title: 'Update Organization Profile', message: 'successfully update organization profile', no: '', yes: 'OK' } });
+          let dialog = this.matDialog.open(ConfirmDialog, { data: { title: 'Update Organization information', message: 'successfully update organization information', no: '', yes: 'OK' } });
           dialog.afterClosed().pipe(first()).subscribe(res => { })
         }
       },
       error => {
-        let dialog = this.matDialog.open(ConfirmDialog, { data: { title: 'Update Organization Profile', message: 'Fail to update organization profile, please try again later', no: '', yes: 'OK' } });
+        let dialog = this.matDialog.open(ConfirmDialog, { data: { title: 'Update Organization information', message: 'Fail to update organization information, please try again later', no: '', yes: 'OK' } });
         dialog.afterClosed().pipe(first()).subscribe(res => { });
       }
     )
@@ -96,12 +98,12 @@ export class OrganizationHomeComponent extends FixChangeDetection implements OnI
           this.organization = res;
           this.organizationCopy = structuredClone(this.organization);
 
-          let dialog = this.matDialog.open(ConfirmDialog, { data: { title: 'Update Organization Profile', message: 'successfully update organization profile', no: '', yes: 'OK' } });
+          let dialog = this.matDialog.open(ConfirmDialog, { data: { title: 'Update Organization information', message: 'successfully update organization information', no: '', yes: 'OK' } });
           dialog.afterClosed().pipe(first()).subscribe(res => { })
         }
       },
       error => {
-        let dialog = this.matDialog.open(ConfirmDialog, { data: { title: 'Update Organization Profile', message: 'Fail to update organization profile, please try again later', no: '', yes: 'OK' } });
+        let dialog = this.matDialog.open(ConfirmDialog, { data: { title: 'Update Organization information', message: 'Fail to update organization information, please try again later', no: '', yes: 'OK' } });
         dialog.afterClosed().pipe(first()).subscribe(res => { });
       }
     )
