@@ -16,6 +16,8 @@ import { OrganizationJoinComponent } from './organization/organization-join/orga
 import { OrganizationProfileComponent } from './organization/organization-profile/organization-profile.component';
 import { OrganizationHomeComponent } from './organization/organization-home/organization-home.component';
 import { OrganizationSmtpComponent } from './organization/organization-smtp/organization-smtp.component';
+import { OrganizationRoleComponent } from './organization/organization-role/organization-role.component';
+import { OrganizationUserComponent } from './organization/organization-user/organization-user.component';
 
 export const defaultTextColor = 'black';
 
@@ -33,7 +35,9 @@ const ORGANIZATION = [
   OrganizationJoinComponent,
   OrganizationProfileComponent,
   OrganizationHomeComponent,
-  OrganizationSmtpComponent
+  OrganizationSmtpComponent,
+  OrganizationRoleComponent,
+  OrganizationUserComponent
 ]
 
 @NgModule({
