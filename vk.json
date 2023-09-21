@@ -25,8 +25,8 @@
 		}
 	},
 	{
-		"configId": 4,
-		"configName": "angular with git hook",
+		"configId": 5,
+		"configName": "angular",
 		"path": "/vincent-services/v-eco",
 		"jobName": "friday-stage",
 		"replaceMap": {
@@ -50,8 +50,8 @@
 		}
 	},
 	{
-		"configId": 4,
-		"configName": "angular with git hook",
+		"configId": 5,
+		"configName": "angular",
 		"path": "/vincent-services/v-eco",
 		"jobName": "friday-prod",
 		"replaceMap": {
