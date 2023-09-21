@@ -1,0 +1,77 @@
+[
+	{
+		"configId": 4,
+		"configName": "angular with git hook",
+		"path": "/vincent-services/v-eco",
+		"jobName": "friday-dev",
+		"replaceMap": {
+			"projectUrl": "https://github.com/vincent-inc/Friday",
+			"displayName": "friday dev",
+			"dockerImage": "friday",
+			"environment": "dev"
+		}
+	},
+	{
+		"configId": 2,
+		"configName": "k8s",
+		"path": "/vincent-services/v-eco",
+		"jobName": "friday-dev-k8s",
+		"replaceMap": {
+			"projectUrl": "https://github.com/vincent-inc/Friday",
+			"displayName": "friday Dev k8s",
+			"triggerAfterJobName": "friday-dev",
+			"k8sServiceFolderName": "friday",
+			"environment": "dev"
+		}
+	},
+	{
+		"configId": 4,
+		"configName": "angular with git hook",
+		"path": "/vincent-services/v-eco",
+		"jobName": "friday-stage",
+		"replaceMap": {
+			"projectUrl": "https://github.com/vincent-inc/Friday",
+			"displayName": "friday stage",
+			"dockerImage": "friday",
+			"environment": "stage"
+		}
+	},
+	{
+		"configId": 2,
+		"configName": "k8s",
+		"path": "/vincent-services/v-eco",
+		"jobName": "friday-stage-k8s",
+		"replaceMap": {
+			"projectUrl": "https://github.com/vincent-inc/Friday",
+			"displayName": "friday stage k8s",
+			"triggerAfterJobName": "friday-stage",
+			"k8sServiceFolderName": "friday",
+			"environment": "stage"
+		}
+	},
+	{
+		"configId": 4,
+		"configName": "angular with git hook",
+		"path": "/vincent-services/v-eco",
+		"jobName": "friday-prod",
+		"replaceMap": {
+			"projectUrl": "https://github.com/vincent-inc/Friday",
+			"displayName": "friday prod",
+			"dockerImage": "friday",
+			"environment": "prod"
+		}
+	},
+	{
+		"configId": 2,
+		"configName": "k8s",
+		"path": "/vincent-services/v-eco",
+		"jobName": "friday-prod-k8s",
+		"replaceMap": {
+			"projectUrl": "https://github.com/vincent-inc/Friday",
+			"displayName": "friday prod k8s",
+			"triggerAfterJobName": "friday-prod",
+			"k8sServiceFolderName": "friday",
+			"environment": "prod"
+		}
+	}
+]
