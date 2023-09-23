@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { first } from 'rxjs';
 import { ConfirmDialog } from 'src/app/shared/dialog/confirm-dialog/confirm-dialog.component';
 import { FixChangeDetection } from 'src/app/shared/directive/FixChangeDetection';
+import { MatList, MatType } from 'src/app/shared/model/Mat.model';
 import { Organization, OrganizationProfile, SMTP } from 'src/app/shared/model/Organization.model';
 import { OrganizationService } from 'src/app/shared/service/Organization.service';
 
@@ -16,8 +17,10 @@ export class OrganizationCreationComponent extends FixChangeDetection implements
 
   validForm: boolean = false;
 
-  organizationProfile: OrganizationProfile = {socialMedias: []};
+  organizationProfile!: OrganizationProfile;
   smtp: SMTP = {};
+
+  socialMedias!: MatList<String>;
   
   constructor(
     private organizationService: OrganizationService,
@@ -28,6 +31,8 @@ export class OrganizationCreationComponent extends FixChangeDetection implements
   }
 
   ngOnInit() {
+    this.organizationProfile = {socialMedias: []};
+    this.socialMedias = new MatList(this.organizationProfile.socialMedias!, MatType.STRING);
   }
 
   createOrganization(): void {
@@ -38,9 +43,6 @@ export class OrganizationCreationComponent extends FixChangeDetection implements
       organizationProfile: this.organizationProfile,
       smtp: this.smtp
     }
-
-    
-
 
     this.organizationService.postOrganization(organization).pipe(first()).subscribe(
       res => {

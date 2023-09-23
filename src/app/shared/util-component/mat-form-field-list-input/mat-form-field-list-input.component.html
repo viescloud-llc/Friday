@@ -4,14 +4,14 @@
       List of {{label}}
     </mat-panel-title>
     <mat-panel-description>
-      Size: {{value.length}}
+      Size: {{value.size()}}
     </mat-panel-description>
   </mat-expansion-panel-header>
   <ul>
     <li *ngIf="showSizeInput">
       <app-mat-form-field-input
       [label]="'Number of ' + label"
-      [value]="value.length"
+      [value]="value.size()"
       (valueOutput)="listLength = $event"
       (onValueChange)="updateListLength()"
       defaultType="number"
@@ -25,10 +25,10 @@
       [focusoutEmit]="false"
       ></app-mat-form-field-input>
     </li>
-    <li *ngFor="let item of value; let i = index; trackBy: trackByIndex;">
+    <li *ngFor="let item of value.getList(); let i = index; trackBy: trackByIndex;">
       <app-mat-form-field-input
       [label]="label + ' ' + (i + 1)"
-      [value]="item" (valueOutput)="value[i] = $event"
+      [value]="item" (valueOutput)="value.getList()[i] = $event"
       styleWidth="100%"
       [required]="required"
       customIconLabel="remove_circle"

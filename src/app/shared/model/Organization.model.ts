@@ -1,3 +1,5 @@
+import { MatList, MatType } from "./Mat.model";
+
 export interface Organization {
     id?:                  string;
     users?:               User[];
@@ -62,4 +64,26 @@ export interface UserProfile {
     city?:      string;
     state?:     string;
     zip?:       string;
+}
+
+export class RoleMatList extends MatList<Role> {
+    override createEmptyItem(): Role {
+        return {
+            id: 0,
+            title: '',
+            active: true,
+            permission: {
+                id:                        0,
+                all:                       false,
+                readOrganizationUser:      false,
+                readOrganizationRole:      false,
+                readOrganizationProfile:   false,
+                readOrganizationSmtp:      false,
+                modifyOrganizationUser:    false,
+                modifyOrganizationRole:    false,
+                modifyOrganizationProfile: false,
+                modifyOrganizationSmtp:    false
+            }
+        }
+    }
 }

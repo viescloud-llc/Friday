@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Organization } from '../model/Organization.model';
 import { HttpClient } from '@angular/common/http';
 import { SettingService } from './Setting.service';
+import { UtilsService } from './Utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -41,4 +42,7 @@ export class OrganizationService {
     return this.httpClient.delete<void>(`${this.settingService.getGatewayUrl()}/${this.prefix}/organizations/${id}`);
   }
 
+  public async getOrganizationAsync(id: string, nextFn?: (value: Organization) => void, errorFn?: (error: any) => void) {
+    return UtilsService.ObservableToPromise(this.getOrganization(id), nextFn, errorFn);
+  }
 }

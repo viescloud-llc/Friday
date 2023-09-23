@@ -147,4 +147,19 @@ export class MatFormFieldComponent implements OnInit, OnChanges {
   resetValue(): void {
     this.value = structuredClone(this.valueCopy);
   }
+
+  isValueArray(): boolean {
+    return Array.isArray(this.value);
+  }
+
+  isValueObject(): boolean {
+    return typeof this.value === 'object';
+  }
+
+  isValuePrimitive(): boolean {
+    if(this.isValueArray() || this.isValueObject())
+      return false;
+    else
+      return true;
+  }
 }

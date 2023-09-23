@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs';
+import { Observable, first } from 'rxjs';
 
 export interface File {
   name: string,
@@ -104,5 +104,22 @@ export class UtilsService {
     }
 
     return null;
+  }
+
+  static async ObservableToPromise<T>(observable: Observable<T>, nextFn?: (value: T) => void, errorFn?: (error: any) => void): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+      observable.pipe(first()).subscribe({
+        next: (v) => {
+          if(nextFn)
+            nextFn(v);
+          resolve(v);
+        },
+        error: (e) => {
+          if(errorFn)
+            errorFn(e);
+          reject(e);
+        }
+      })
+    })
   }
 }

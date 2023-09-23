@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { ConfirmDialog } from 'src/app/shared/dialog/confirm-dialog/confirm-dialog.component';
 import { FixChangeDetection } from 'src/app/shared/directive/FixChangeDetection';
 import { Organization } from 'src/app/shared/model/Organization.model';
@@ -21,8 +21,6 @@ export class OrganizationHomeComponent extends FixChangeDetection implements OnI
 
   validForm: boolean = false;
 
-
-
   constructor(
     private organizationService: OrganizationService,
     private router: Router,
@@ -37,22 +35,22 @@ export class OrganizationHomeComponent extends FixChangeDetection implements OnI
     this.id = id;
 
     if (id)
-      this.init();
+      await this.init();
     else
       this.router.navigate(['/home']);
   }
 
-  init() {
-    if (this.id) {
-      this.organizationService.getOrganization(this.id).pipe(first()).subscribe(
-        res => {
+  async init() {
+    if(this.id)
+      return this.organizationService.getOrganizationAsync(this.id, 
+        (res) => {
           if (res) {
             this.organization = res;
             this.organizationCopy = structuredClone(this.organization);
           }
-        }
-      );
-    }
+        });
+    
+    return Promise.reject("invalid ID");
   }
 
   validUpdate(): boolean {
