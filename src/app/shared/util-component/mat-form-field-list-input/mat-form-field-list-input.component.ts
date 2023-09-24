@@ -79,4 +79,12 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
     return this.value.size() >= this.maxSize;
   }
 
+  getKeyAndValueList(obj: Object) {
+    let list = [];
+    for (const [key, value] of Object.entries(obj)) {
+      if(!Array.isArray(value) && typeof value !== 'object')
+        list.push([key, value])
+    }
+    return list;
+  }
 }

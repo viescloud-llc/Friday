@@ -1,5 +1,7 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { OrganizationHomeComponent } from '../organization-home/organization-home.component';
+import { Role, RoleMatList } from 'src/app/shared/model/Organization.model';
+import { MatType } from 'src/app/shared/model/Mat.model';
 
 @Component({
   selector: 'app-organization-role',
@@ -8,5 +10,10 @@ import { OrganizationHomeComponent } from '../organization-home/organization-hom
   providers: [{ provide: OrganizationHomeComponent, useExisting: forwardRef(() => OrganizationRoleComponent) }],
 })
 export class OrganizationRoleComponent extends OrganizationHomeComponent {
+  roles!: RoleMatList;
 
+  override async ngOnInit() {
+      await super.ngOnInit();
+      this.roles = new RoleMatList(this.organization.roles!, MatType.OBJECT);
+  }
 }

@@ -25,17 +25,33 @@
       [focusoutEmit]="false"
       ></app-mat-form-field-input>
     </li>
-    <li *ngFor="let item of value.getList(); let i = index; trackBy: trackByIndex;">
-      <app-mat-form-field-input
-      [label]="label + ' ' + (i + 1)"
-      [value]="item" (valueOutput)="value.getList()[i] = $event"
-      styleWidth="100%"
-      [required]="required"
-      customIconLabel="remove_circle"
-      (onCustomIconClick)="remove(i)"
-      ></app-mat-form-field-input>
-      <hr>
-    </li>
+    <ng-container *ngIf="value.getType() !=='object' && value.getType() !=='array'">
+      <li *ngFor="let item of value.getList(); let i = index; trackBy: trackByIndex;">
+        <app-mat-form-field-input
+        [label]="label + ' ' + (i + 1)"
+        [value]="item" (valueOutput)="value.getList()[i] = $event"
+        styleWidth="100%"
+        [required]="required"
+        customIconLabel="remove_circle"
+        (onCustomIconClick)="remove(i)"
+        ></app-mat-form-field-input>
+      </li>
+    </ng-container>
+    <ng-container *ngIf="value.getType() =='object'">
+      <ng-container *ngFor="let obj of value.getList(); let i = index; trackBy: trackByIndex;">
+        <ng-container *ngFor="let item of getKeyAndValueList(obj); let j = index; trackBy: trackByIndex;">
+          <li>
+            <app-mat-form-field-input
+            [label]="label + ' ' + item[0]"
+            [value]="item[1]"
+            styleWidth="100%"
+            [required]="required"
+            ></app-mat-form-field-input>
+          </li>
+        </ng-container>
+        <hr>
+      </ng-container>
+    </ng-container>
     <li><button mat-raised-button color="primary" style="width: 100%;" (click)="addNewItem()" [disabled]="reachMaxSize()">Add new {{label}}</button></li>
   </ul>
 </mat-expansion-panel>

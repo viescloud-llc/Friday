@@ -12,6 +12,34 @@ export interface MatRow {
 
 }
 
+export interface MatOption {
+    value: any, 
+    valueLabel: string, 
+    disable?: boolean
+}
+
+export interface Time {
+    id?: number;
+    year?: number;
+    month?: number;
+    day?: number;
+    hours?: number;
+    minute?: number;
+    second?: number;
+}
+
+export class MatListItem<T> {
+    constructor(private ref: T, public key: string, private setter: (value: T) => void, private getter: () => T) {}
+
+    getValue() {
+        this.getter();
+    }
+
+    setValue(value: T) {
+        this.setter(value);
+    }
+}
+
 export class MatList<T> {
 
     constructor(private list: T[], private matType: MatType) {
@@ -44,6 +72,10 @@ export class MatList<T> {
     getMatType(): MatType {
         return this.matType;
     }
+
+    getType(): string {
+        return this.matType;
+    }
     
     getList(): T[] {
         return this.list;
@@ -56,20 +88,10 @@ export class MatList<T> {
     size(): number {
         return this.list.length;
     }
-}
 
-export interface MatOption {
-    value: any, 
-    valueLabel: string, 
-    disable?: boolean
-}
+    // getMatItemList(): MatListItem<T>[] {
+    //     let matItemList: MatListItem<T>[] = [];
 
-export interface Time {
-    id?: number;
-    year?: number;
-    month?: number;
-    day?: number;
-    hours?: number;
-    minute?: number;
-    second?: number;
+    //     return matItemList;
+    // }
 }

@@ -13,6 +13,6 @@ export class OrganizationProfileComponent extends OrganizationHomeComponent {
 
   override async ngOnInit() {
       await super.ngOnInit();
-      this.socialMedias = new MatList(this.organization.organizationProfile!.socialMedias! ?? [], MatType.STRING);
+      this.socialMedias = new MatList(this.organization.organizationProfile!.socialMedias!, MatType.STRING);
   }
 }
