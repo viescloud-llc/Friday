@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatRow } from '../../model/Mat.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatColumn } from '../../model/Mat.model';
 
 @Component({
   selector: 'app-mat-table',
@@ -15,7 +15,10 @@ export class MatTableComponent implements OnInit, OnChanges {
   filterDisplay: number = 0;
 
   @Input()
-  matRows: MatRow[] = [];
+  matRows: object[] = [];
+
+  @Input()
+  matColumns!: MatColumn[]
 
   @Input()
   pagination: number[] = [5, 10, 25, 100];
@@ -27,10 +30,10 @@ export class MatTableComponent implements OnInit, OnChanges {
   displayPagination: boolean = false;
 
   @Output()
-  onEditRow: EventEmitter<MatRow> = new EventEmitter();
+  onEditRow: EventEmitter<object> = new EventEmitter();
 
   displayedColumns: string[] = [];
-  
+
   dataSource = new MatTableDataSource(this.matRows);
 
   filter?: string;
@@ -49,11 +52,16 @@ export class MatTableComponent implements OnInit, OnChanges {
   }
 
   init() {
-    this.displayedColumns = [];
-    if(this.matRows.length > 0) {
-      for (const [key, value] of Object.entries(this.matRows[0])) {
+    if (!this.matColumns)
+      this.fillColumns();
+
+    if (this.matRows.length > 0) {
+      this.displayedColumns = [];
+      for (const [key, value] of Object.entries(this.matRows[0]))
         this.displayedColumns.push(key.toString())
-      }
+
+      this.filterColumns();
+
       this.pagination = this.pagination.sort((a, b) => a - b);
       this.dataSource.data = this.matRows;
       this.dataSource.sort = this.sort;
@@ -61,9 +69,45 @@ export class MatTableComponent implements OnInit, OnChanges {
     }
   }
 
-  getValue(element: any, key: any): any {
+  private fillColumns() {
+    if (this.matRows.length > 0) {
+      this.matColumns = [];
+      let index = 0;
+      for (const [key, value] of Object.entries(this.matRows[0])) {
+        this.matColumns.push({
+          index: index,
+          label: value
+        })
+        index++;
+      }
+    }
+  }
+
+  private filterColumns() {
+    if (this.matColumns) {
+      this.matColumns = this.matColumns.sort((a, b) => a.index - b.index);
+      let newDisplayColumn: string[] = [];
+      this.matColumns.forEach(e => {
+        let index = e.index;
+        newDisplayColumn.push(this.displayedColumns[index]);
+      });
+      this.displayedColumns = newDisplayColumn;
+    }
+  }
+
+  private indexingRow() {
+    this.matRows.forEach(e => {
+
+    })
+  }
+
+  getValue(element: object, label: string): any {
+    let matLabel = this.getColumnSetting(label);
+    if (matLabel.getDisplayValueFn)
+      return matLabel.getDisplayValueFn(element)
+
     for (const [keyT, value] of Object.entries(element)) {
-      if(keyT === key)
+      if (keyT === label)
         return value;
     }
 
@@ -82,13 +126,34 @@ export class MatTableComponent implements OnInit, OnChanges {
   clearFilter() {
     this.dataSource.filter = '';
 
-    if (this.dataSource.paginator) 
-    {
+    if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
 
-  editRow(row: MatRow) {
+  editRow(row: object) {
     this.onEditRow.emit(row);
+  }
+
+  getColumnSetting(label: string): MatColumn {
+    let index = 0;
+    let matColumn: MatColumn;
+    this.displayedColumns.forEach(e => {
+      if (e === label) {
+        matColumn = this.matColumns[index];
+        return;
+      }
+      index++;
+    })
+
+    return matColumn!;
+  }
+
+  getLabel(label: string): string {
+    let matColumn = this.getColumnSetting(label);
+    if (matColumn.label)
+      return matColumn.label;
+    else
+      return label;
   }
 }

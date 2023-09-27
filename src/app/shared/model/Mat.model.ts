@@ -8,13 +8,15 @@ export enum MatType {
     BOOLEAN = 'boolean'
 }
 
-export interface MatRow {
-
+export interface MatColumn {
+    index: number;
+    label?: string;
+    getDisplayValueFn?: (obj: any) => any;
 }
 
 export interface MatOption {
-    value: any, 
-    valueLabel: string, 
+    value: any,
+    valueLabel: string,
     disable?: boolean
 }
 
@@ -29,24 +31,30 @@ export interface Time {
 }
 
 export class MatListItem<T> {
-    constructor(private ref: T, public key: string, private setter: (value: T) => void, private getter: () => T) {}
+    constructor(private ref?: T, public key?: string, private setter?: (ref: T, value: T) => void, private getter?: (ref: T) => any, public disable: boolean = false) { }
 
     getValue() {
-        this.getter();
+        if (this.ref && this.getter)
+            return this.getter(this.ref);
     }
 
     setValue(value: T) {
-        this.setter(value);
+        if (this.ref && this.setter)
+            this.setter(this.ref, value);
+    }
+
+    isEmpty() {
+        return !this.ref;
     }
 }
 
 export class MatList<T> {
 
-    constructor(private list: T[], private matType: MatType) {
+    constructor(protected list: T[], private matType: MatType) {
     }
 
     createEmptyItem(): T {
-        switch(this.matType) {
+        switch (this.matType) {
             case MatType.OBJECT:
                 return {} as T;
             case MatType.ARRAY:
@@ -76,7 +84,7 @@ export class MatList<T> {
     getType(): string {
         return this.matType;
     }
-    
+
     getList(): T[] {
         return this.list;
     }
@@ -89,9 +97,7 @@ export class MatList<T> {
         return this.list.length;
     }
 
-    // getMatItemList(): MatListItem<T>[] {
-    //     let matItemList: MatListItem<T>[] = [];
-
-    //     return matItemList;
-    // }
+    getMatItemList(): MatListItem<T>[] {
+        throw new Error("Mat item list not supported");
+    }
 }

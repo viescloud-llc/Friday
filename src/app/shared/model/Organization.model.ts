@@ -1,4 +1,4 @@
-import { MatList, MatType } from "./Mat.model";
+import { MatColumn } from "./Mat.model";
 
 export interface Organization {
     id?:                  string;
@@ -21,11 +21,37 @@ export interface OrganizationProfile {
     zip?:          number;
 }
 
-export interface Role {
+export class Role {
     id?:         number;
     title?:      string;
     active?:     boolean;
     permission?: Permission;
+
+    constructor(id: number, title: string, active: boolean, permission: Permission) {
+        this.id = id;
+        this.title = title;
+        this.active = active;
+        this.permission = permission;
+    }
+
+    static getDisplayColumns(): MatColumn[] {
+        return [
+            {
+                index: 0
+            },
+            {
+                index: 1
+            },
+            {
+                index: 2
+            },
+            {
+                index: 3,
+                label: 'ok',
+                getDisplayValueFn: (role: Role) => true
+            }
+        ]
+    }
 }
 
 export interface Permission {
@@ -64,26 +90,4 @@ export interface UserProfile {
     city?:      string;
     state?:     string;
     zip?:       string;
-}
-
-export class RoleMatList extends MatList<Role> {
-    override createEmptyItem(): Role {
-        return {
-            id: 0,
-            title: '',
-            active: true,
-            permission: {
-                id:                        0,
-                all:                       false,
-                readOrganizationUser:      false,
-                readOrganizationRole:      false,
-                readOrganizationProfile:   false,
-                readOrganizationSmtp:      false,
-                modifyOrganizationUser:    false,
-                modifyOrganizationRole:    false,
-                modifyOrganizationProfile: false,
-                modifyOrganizationSmtp:    false
-            }
-        }
-    }
 }

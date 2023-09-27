@@ -37,21 +37,20 @@
         ></app-mat-form-field-input>
       </li>
     </ng-container>
-    <ng-container *ngIf="value.getType() =='object'">
-      <ng-container *ngFor="let obj of value.getList(); let i = index; trackBy: trackByIndex;">
-        <ng-container *ngFor="let item of getKeyAndValueList(obj); let j = index; trackBy: trackByIndex;">
-          <li>
-            <app-mat-form-field-input
-            [label]="label + ' ' + item[0]"
-            [value]="item[1]"
-            styleWidth="100%"
-            [required]="required"
-            ></app-mat-form-field-input>
-          </li>
+    <mat-list *ngIf="value.getType() =='object'">
+      <ng-container *ngFor="let item of value.getMatItemList()">
+        <ng-container *ngIf="!item.isEmpty()">
+            <mat-list-item>
+              <mat-icon matListItemIcon>folder</mat-icon>
+              <div matListItemTitle>Title</div>
+              <div matListItemLine>{{item.key}}</div>
+            </mat-list-item>
         </ng-container>
-        <hr>
+        <ng-container *ngIf="item.isEmpty()">
+          <mat-divider></mat-divider>
+        </ng-container>
       </ng-container>
-    </ng-container>
+    </mat-list>
     <li><button mat-raised-button color="primary" style="width: 100%;" (click)="addNewItem()" [disabled]="reachMaxSize()">Add new {{label}}</button></li>
   </ul>
 </mat-expansion-panel>

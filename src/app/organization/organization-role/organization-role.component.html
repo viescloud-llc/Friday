@@ -1,10 +1,10 @@
 <ul class="margin-center">
   <li><h1 class="text-center">User Role</h1></li>
-  <li>
-    <app-mat-form-field-list-input
-    label="Roles"
-    [value]="roles"
-    [showSizeInput]="false"
-    ></app-mat-form-field-list-input>
+  <li *ngIf="matRows">
+    <app-mat-table
+    [matRows]="matRows"
+    [matColumns]="matColumns"
+    (onEditRow)="onEditRow($event)"
+    ></app-mat-table>
   </li>
 </ul>

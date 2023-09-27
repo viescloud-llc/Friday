@@ -9,7 +9,7 @@ import { MatList, MatType } from 'src/app/shared/model/Mat.model';
   providers: [{ provide: OrganizationHomeComponent, useExisting: forwardRef(() => OrganizationProfileComponent) }],
 })
 export class OrganizationProfileComponent extends OrganizationHomeComponent {
-  socialMedias!: MatList<String>;
+  socialMedias!: MatList<string>;
 
   override async ngOnInit() {
       await super.ngOnInit();

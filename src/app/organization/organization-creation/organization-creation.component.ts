@@ -20,7 +20,7 @@ export class OrganizationCreationComponent extends FixChangeDetection implements
   organizationProfile!: OrganizationProfile;
   smtp: SMTP = {};
 
-  socialMedias!: MatList<String>;
+  socialMedias!: MatList<string>;
   
   constructor(
     private organizationService: OrganizationService,
@@ -61,5 +61,4 @@ export class OrganizationCreationComponent extends FixChangeDetection implements
       }
     );
   }
-
 }
