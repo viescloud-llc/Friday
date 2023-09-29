@@ -8,6 +8,10 @@ export enum MatType {
     BOOLEAN = 'boolean'
 }
 
+export interface MatDialogItem {
+    getIdFn: () => any;
+}
+
 export interface MatColumn {
     index: number;
     label?: string;

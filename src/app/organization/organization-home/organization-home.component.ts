@@ -22,10 +22,10 @@ export class OrganizationHomeComponent extends FixChangeDetection implements OnI
   validForm: boolean = false;
 
   constructor(
-    private organizationService: OrganizationService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private matDialog: MatDialog
+    protected organizationService: OrganizationService,
+    protected router: Router,
+    protected activatedRoute: ActivatedRoute,
+    protected matDialog: MatDialog
   ) {
     super();
   }

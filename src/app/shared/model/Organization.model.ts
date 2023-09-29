@@ -27,11 +27,11 @@ export class Role {
     active?:     boolean;
     permission?: Permission;
 
-    constructor(id: number, title: string, active: boolean, permission: Permission) {
-        this.id = id;
-        this.title = title;
-        this.active = active;
-        this.permission = permission;
+    constructor(id?: number, title?: string, active?: boolean, permission?: Permission) {
+        this.id = id ?? 0;
+        this.title = title ?? '';
+        this.active = active ?? true;
+        this.permission = permission ?? new Permission();
     }
 
     static getDisplayColumns(): MatColumn[] {
@@ -44,17 +44,12 @@ export class Role {
             },
             {
                 index: 2
-            },
-            {
-                index: 3,
-                label: 'ok',
-                getDisplayValueFn: (role: Role) => true
             }
         ]
     }
 }
 
-export interface Permission {
+export class Permission {
     id?:                        number;
     all?:                       boolean;
     readOrganizationUser?:      boolean;
@@ -65,6 +60,30 @@ export interface Permission {
     modifyOrganizationRole?:    boolean;
     modifyOrganizationProfile?: boolean;
     modifyOrganizationSmtp?:    boolean;
+    
+    constructor(
+        id?:                        number,
+        all?:                       boolean,
+        readOrganizationUser?:      boolean,
+        readOrganizationRole?:      boolean,
+        readOrganizationProfile?:   boolean,
+        readOrganizationSmtp?:      boolean,
+        modifyOrganizationUser?:    boolean,
+        modifyOrganizationRole?:    boolean,
+        modifyOrganizationProfile?: boolean,
+        modifyOrganizationSmtp?:    boolean,
+        ) {
+        this.id =                        id ?? 0;
+        this.all =                       all ?? true;
+        this.readOrganizationUser =      readOrganizationUser ?? true;
+        this.readOrganizationRole =      readOrganizationRole ?? true;
+        this.readOrganizationProfile =   readOrganizationProfile ?? true;
+        this.readOrganizationSmtp =      readOrganizationSmtp ?? true;
+        this.modifyOrganizationUser =    modifyOrganizationUser ?? true;
+        this.modifyOrganizationRole =    modifyOrganizationRole ?? true;
+        this.modifyOrganizationProfile = modifyOrganizationProfile ?? true;
+        this.modifyOrganizationSmtp =    modifyOrganizationSmtp ?? true;
+    }
 }
 
 export interface SMTP {
