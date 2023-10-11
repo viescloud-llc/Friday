@@ -1,3 +1,35 @@
 <ng-container *ngIf="isValueBoolean()">
-  
+  <app-mat-form-field-input-option
+    [label]="label"
+    [value]="value" (valueOutput)="value = $event"
+    (onValueChange)="emitValue()"
+    [options]="options"
+    noneLabel=""
+    [styleWidth]="styleWidth"
+    [disable]="disable"
+  ></app-mat-form-field-input-option>
+</ng-container>
+
+<ng-container *ngIf="isValueNonMultipleStringLine()">
+  <app-mat-form-field-input
+  [label]="label"
+  [value]="value" (valueOutput)="value = $event"
+  (onValueChange)="emitValue()"
+  [required]="required"
+  [showVisibleSwitch]="isPassword"
+  [validateEmail]="isEmail"
+  [styleWidth]="styleWidth"
+  [disable]="disable"
+  ></app-mat-form-field-input>
+</ng-container>
+
+<ng-container *ngIf="isValueMultipleStringLine()">
+  <app-mat-form-field-text-area
+  [label]="label"
+  [value]="value" (valueOutput)="value = $event"
+  (onValueChange)="emitValue()"
+  [required]="required"
+  [styleWidth]="styleWidth"
+  [disable]="disable"
+  ></app-mat-form-field-text-area>
 </ng-container>

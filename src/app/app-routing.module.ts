@@ -11,6 +11,7 @@ import { OrganizationHomeComponent } from './organization/organization-home/orga
 import { OrganizationSmtpComponent } from './organization/organization-smtp/organization-smtp.component';
 import { OrganizationRoleComponent } from './organization/organization-role/organization-role.component';
 import { OrganizationUserComponent } from './organization/organization-user/organization-user.component';
+import { GeneralSettingComponent } from './setting/general-setting/general-setting.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,16 @@ const routes: Routes = [
             component: OrganizationUserComponent
           }
         ]
+      }
+    ]
+  },
+  {
+    path: 'setting',
+    canActivateChild: [AuthGuard],
+    children: [
+      {
+        path: 'general',
+        component: GeneralSettingComponent
       }
     ]
   },

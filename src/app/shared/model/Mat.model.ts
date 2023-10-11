@@ -105,3 +105,15 @@ export class MatList<T> {
         throw new Error("Mat item list not supported");
     }
 }
+
+export class MatFromFieldInputDynamicData {
+    parentRef: any;
+    currentRef: any;
+
+    constructor(parentRef: any, currentRef?: any) {
+        this.parentRef = parentRef;
+
+        if(currentRef)
+            this.currentRef = currentRef;
+    }
+}

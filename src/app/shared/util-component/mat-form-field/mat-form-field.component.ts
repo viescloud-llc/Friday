@@ -54,6 +54,9 @@ export class MatFormFieldComponent implements OnInit, OnChanges {
   autoResize: boolean = false;
 
   defaultTextColor = 'black';
+  
+  //key capture
+  keyDown: string[] = [];
 
   constructor() { }
 
@@ -72,6 +75,10 @@ export class MatFormFieldComponent implements OnInit, OnChanges {
 
   emitEnter(): void {
     this.onEnter.emit();
+  }
+
+  addKey(keybaordEvent: KeyboardEvent) {
+    console.log(keybaordEvent);
   }
 
   clear(): void {
@@ -138,6 +145,14 @@ export class MatFormFieldComponent implements OnInit, OnChanges {
 
   isValueString(): boolean {
     return typeof this.value === 'string';
+  }
+
+  isValueMultipleStringLine(): boolean {
+    return typeof this.value === 'string' && this.value.includes("\n");
+  }
+
+  isValueNonMultipleStringLine(): boolean {
+    return typeof this.value === 'string' && !this.value.includes("\n");
   }
 
   isValueNumber(): boolean {

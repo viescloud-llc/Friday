@@ -18,6 +18,7 @@ import { OrganizationHomeComponent } from './organization/organization-home/orga
 import { OrganizationSmtpComponent } from './organization/organization-smtp/organization-smtp.component';
 import { OrganizationRoleComponent } from './organization/organization-role/organization-role.component';
 import { OrganizationUserComponent } from './organization/organization-user/organization-user.component';
+import { GeneralSettingComponent } from './setting/general-setting/general-setting.component';
 
 export const defaultTextColor = 'black';
 
@@ -40,10 +41,15 @@ const ORGANIZATION = [
   OrganizationUserComponent
 ]
 
+const SETTING = [
+  GeneralSettingComponent
+]
+
 @NgModule({
   declarations: [
     ... DASH_BOARD,
-    ... ORGANIZATION
+    ... ORGANIZATION,
+    ... SETTING
   ],
   imports: [
     NgEssentialModule,
