@@ -2,9 +2,9 @@ import { AfterViewChecked, ChangeDetectorRef, Component, Inject, OnInit } from '
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 export interface ObjectDialogData<T = object, S = object> {
-  id: string | number, 
+  id: any, 
   service: S, 
-  getFn: (service: S, id: string | number) => Promise<T> | T, 
+  getFn: (service: S, id: any) => Promise<T> | T, 
   createFn?: (service: S, value: T) => Promise<T>, 
   modifyFn?: (service: S, value: T) => Promise<T>
 }
@@ -46,7 +46,7 @@ export class ObjectDialog<T = object, S = object> implements OnInit, AfterViewCh
   }
 
   getModifyLabel(): string {
-    return this.data.createFn ? 'Create' : 'Modify';
+    return !this.data.id && this.data.createFn ? 'Create' : 'Modify';
   }
 
   ngAfterViewChecked(): void {
@@ -57,7 +57,7 @@ export class ObjectDialog<T = object, S = object> implements OnInit, AfterViewCh
     this.dialogRef.close(result);
   }
 
-  modifyItem() {
+  triggerItemEvent() {
     if(!this.data.id && this.data.createFn) {
       this.data.createFn(this.data.service, this.value)
       .then(r => this.closeDialog(r))

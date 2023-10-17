@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, Type, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, first } from 'rxjs';
 

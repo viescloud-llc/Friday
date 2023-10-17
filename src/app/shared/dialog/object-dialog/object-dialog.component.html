@@ -7,7 +7,7 @@
   </ul>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" [disabled]="!validForm" (click)="modifyItem()">{{getModifyLabel()}}</button>
+  <button mat-raised-button color="primary" [disabled]="!validForm" (click)="triggerItemEvent()">{{getModifyLabel()}}</button>
   <button mat-raised-button color="accent" [disabled]="!isValueChange()" (click)="revert()">Revert</button>
   <button mat-raised-button color="warn" mat-dialog-close>Close</button>
 </div>
