@@ -1,4 +1,4 @@
-import { MatColumn } from "./Mat.model";
+import { MatColumn, matInputDisable, matInputRequire } from "./Mat.model";
 
 export interface Organization {
     id?:                  string;
@@ -22,7 +22,10 @@ export interface OrganizationProfile {
 }
 
 export class Role {
+    @matInputDisable(true)
     id?:         number;
+    @matInputDisable(true)
+    @matInputRequire(true)
     title?:      string;
     active?:     boolean;
     permission?: Permission;

@@ -117,3 +117,31 @@ export class MatFromFieldInputDynamicData {
             this.currentRef = currentRef;
     }
 }
+
+export const matInputDisable = (disable: boolean) => {
+    return function matInputDisable(object: any, key: any) {
+        let value = object[key];
+        let name = key + 'Disable'
+    
+        Object.defineProperty(object, name, {
+            value: disable,
+            writable: true,
+            configurable: true,
+            enumerable: true
+        })
+    }
+}
+
+export const matInputRequire = (require: boolean) => {
+    return function matInputDisable(object: any, key: any) {
+        let value = object[key];
+        let name = key + 'Require'
+    
+        Object.defineProperty(object, name, {
+            value: require,
+            writable: true,
+            configurable: true,
+            enumerable: true
+        })
+    }
+}

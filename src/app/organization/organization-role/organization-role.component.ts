@@ -23,11 +23,29 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
   }
 
   onEditRow(role: Role) {
-    let dialog = this.matDialog.open(OrganizationRoleDialog, {data: {role: role, organization: this.organization}});
+    let dialogData: ObjectDialogData<Role, OrganizationService> = {
+      id: role.id!,
+      service: this.organizationService,
+      getFn: async (service: OrganizationService, id: string | number) => {
+        return new Promise<Role>((resolve, reject) => {
+          resolve(role);
+        })
+      },
+      // createFn: async (role: Role, service: OrganizationService) => {
+      //   console.log('create')
+      // },
+      modifyFn: async (service: OrganizationService, role: Role) => {
+        return new Promise<Role>((resolve, reject) => {
+          resolve(role);
+        })
+      }
+    }
+    let dialog = this.matDialog.open(ObjectDialog, {data: dialogData})
+
+    // let dialog = this.matDialog.open(OrganizationRoleDialog, {data: {role: role, organization: this.organization}});
 
     dialog.afterClosed().pipe(first()).subscribe(
       res => {
-        console.log(res);
       }
     )
   }

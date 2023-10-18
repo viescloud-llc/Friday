@@ -122,4 +122,8 @@ export class UtilsService {
       })
     })
   }
+
+  static async fixPrototype<T extends Object>(object: T, prototype: T) {
+    Object.setPrototypeOf(object, prototype);
+  } 
 }
