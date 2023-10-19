@@ -10,9 +10,11 @@ import { User } from 'src/app/shared/model/Organization.model';
 })
 export class OrganizationUserComponent extends OrganizationHomeComponent {
   users: User[] = [];
+  blankUser!: User;
 
   override async ngOnInit() {
     await super.ngOnInit();
     this.users = this.organization.users!;
+    this.blankUser = new User();
   }
 }
