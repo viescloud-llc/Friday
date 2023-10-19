@@ -49,6 +49,18 @@
   ></app-mat-form-field-text-area>
 </ng-container>
 
+<ng-container *ngIf="isValueArray()">
+  <app-mat-form-field-list-input
+  [label]="label"
+  [value]="value" (valueOutput)="value = $event"
+  (onValueChange)="emitValue()"
+  [required]="required"
+  [styleWidth]="styleWidth"
+  [disable]="disable"
+  [required]="required"
+  ></app-mat-form-field-list-input>
+</ng-container>
+
 <ng-container *ngIf="isValueObject()">
   <h2 class="text-center">{{objectLabel}}</h2>
   <ul *ngFor="let item of items">
@@ -65,3 +77,4 @@
     </li>
   </ul>
 </ng-container>
+
