@@ -50,6 +50,7 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
 
     if(this.isValueObject() && this.blankObject) {
       this.parseItems();
+      console.log(this.items);
     }
   }
 
@@ -57,7 +58,7 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
   parseItems () {
     this.items = [];
     for (const [key, value] of Object.entries(this.value)) {
-      this.items.push(new MatFromFieldInputDynamicItem(this.value[key], key, value, this.getSetting(key)));
+      this.items.push(new MatFromFieldInputDynamicItem(this.value, this.blankObject[key], key, value, this.getSetting(key)));
     }
   }
   

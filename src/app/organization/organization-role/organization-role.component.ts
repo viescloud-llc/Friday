@@ -23,8 +23,6 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
   }
 
   onEditRow(role: Role) {
-    Object.setPrototypeOf(role, Role.prototype);
-
     let dialogData: ObjectDialogData<Role, OrganizationService> = {
       id: role.id!,
       service: this.organizationService,

@@ -142,19 +142,21 @@ export class MatFromFieldInputDynamicData {
 
 export class MatFromFieldInputDynamicItem {
     ref: any;
+    blankObject: any;
     key: string = '';
     value: any;
     settings: MatItemSetting[] = [];
 
-    constructor(ref: any, keyLabel: string, value: any, settings: MatItemSetting[]) {
+    constructor(ref: any, blankObject: any, keyLabel: string, value: any, settings: MatItemSetting[]) {
         this.ref = ref;
+        this.blankObject = blankObject;
         this.key = keyLabel;
         this.value = value;
         this.settings = settings;
     }
 
     setValueFn(value: any) {
-        this.ref = value;
+        this.ref[this.key] = value;
     };
 
     containSetting(setting: string | MatItemSettingType): boolean {
