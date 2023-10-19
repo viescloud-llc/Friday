@@ -1,3 +1,15 @@
+<ng-container *ngIf="isValueNumber()">
+  <app-mat-form-field-input
+    [label]="label"
+    [value]="value" (valueOutput)="value = $event"
+    (onValueChange)="emitValue()"
+    [styleWidth]="styleWidth"
+    [disable]="disable"
+    [required]="required"
+    defaultType="number"
+  ></app-mat-form-field-input>
+</ng-container>
+
 <ng-container *ngIf="isValueBoolean()">
   <app-mat-form-field-input-option
     [label]="label"
@@ -7,6 +19,7 @@
     noneLabel=""
     [styleWidth]="styleWidth"
     [disable]="disable"
+    [required]="required"
   ></app-mat-form-field-input-option>
 </ng-container>
 
@@ -20,6 +33,7 @@
   [validateEmail]="isEmail"
   [styleWidth]="styleWidth"
   [disable]="disable"
+  [required]="required"
   ></app-mat-form-field-input>
 </ng-container>
 
@@ -31,5 +45,19 @@
   [required]="required"
   [styleWidth]="styleWidth"
   [disable]="disable"
+  [required]="required"
   ></app-mat-form-field-text-area>
+</ng-container>
+
+<ng-container *ngIf="isValueObject()">
+  <ul *ngFor="let item of items">
+    <app-mat-form-field-input-dynamic
+    [label]="item.key"
+    [value]="item.value" (valueOutput)="item.setValueFn($event)"
+    [styleWidth]="styleWidth"
+    [disable]="item.containSetting('disable')"
+    [required]="item.containSetting('require')"
+    ></app-mat-form-field-input-dynamic>
+  </ul>
+  
 </ng-container>

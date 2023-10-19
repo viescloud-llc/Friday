@@ -8,6 +8,28 @@ export enum MatType {
     BOOLEAN = 'boolean'
 }
 
+export enum MatItemSettingType {
+    DISABLE = <any>'disable',
+    REQUIRE = <any>'require'
+}
+
+export class MatItemSetting {
+    type: MatItemSettingType;
+    value: any;
+
+    constructor(type: MatItemSettingType, value?: any) {
+        this.type = type;
+        if(value)
+            this.value = value;
+        else
+            this.value = type;
+    }
+
+    equalType(type: MatItemSettingType) {
+        return this.type === type;
+    }
+}
+
 export interface MatDialogItem {
     getIdFn: () => any;
 }
@@ -118,6 +140,46 @@ export class MatFromFieldInputDynamicData {
     }
 }
 
+export class MatFromFieldInputDynamicItem {
+    ref: any;
+    key: string = '';
+    value: any;
+    settings: MatItemSetting[] = [];
+
+    constructor(ref: any, keyLabel: string, value: any, settings: MatItemSetting[]) {
+        this.ref = ref;
+        this.key = keyLabel;
+        this.value = value;
+        this.settings = settings;
+    }
+
+    setValueFn(value: any) {
+        this.ref = value;
+    };
+
+    containSetting(setting: string | MatItemSettingType): boolean {
+        let include = false;
+        
+        if(typeof setting === 'string') {
+            setting = MatItemSettingType[setting.toUpperCase() as any];
+            if(setting) {
+                this.settings.forEach(e => {
+                    if(e.equalType(setting as MatItemSettingType))
+                        include = true;
+                })
+            }
+        }
+        else {
+            this.settings.forEach(e => {
+                if(e.equalType(setting as MatItemSettingType))
+                    include = true;
+            })
+        }
+
+        return include;
+    }
+}
+
 export const matInputDisable = (disable: boolean) => {
     return function matInputDisable(object: any, key: any) {
         let value = object[key];
@@ -144,4 +206,13 @@ export const matInputRequire = (require: boolean) => {
             enumerable: true
         })
     }
+}
+
+export const addGetPrototype = (object: any) => {
+    Object.defineProperty(object, "getPrototype", {
+        value: function a() {},
+        writable: true,
+        configurable: true,
+        enumerable: true
+    })
 }

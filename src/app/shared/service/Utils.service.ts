@@ -123,7 +123,28 @@ export class UtilsService {
     })
   }
 
-  static async fixPrototype<T extends Object>(object: T, prototype: T) {
-    Object.setPrototypeOf(object, prototype);
+  static fixPrototype<T>(classEntity: any) {
+    return <T>(source: Observable<T>): Observable<T> => {
+      return new Observable(subscriber => {
+        source.subscribe({
+          next(value) {
+            if(value !== undefined && value !== null) {
+              Object.setPrototypeOf(value, classEntity.prototype);
+            }
+            subscriber.next(value);
+          },
+          error(error) {
+            subscriber.error(error);
+          },
+          complete() {
+            subscriber.complete();
+          }
+        })
+      });
+    };
   } 
+
+  static createObject<T>(_createClass: {new (): T}): T {
+    return new _createClass();
+  }
 }

@@ -1,8 +1,16 @@
 <h1 mat-dialog-title>ID: {{data.id}}</h1>
 <div mat-dialog-content appMatFormFieldGroup (onAllInputCheck)="validForm = $event">
-  <ul>
+  <ul *ngIf="value">
     <li *ngIf="error">
       <h1 class="text-center" style="color: red">{{error}}</h1>
+    </li>
+    <li>
+      <app-mat-form-field-input-dynamic
+      label="test dynamic object"
+      [value]="value" (valueOutput)="value = $event"
+      [blankObject]="data.blankObject"
+      styleWidth="100%"
+      ></app-mat-form-field-input-dynamic>
     </li>
   </ul>
 </div>

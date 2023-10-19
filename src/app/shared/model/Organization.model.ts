@@ -1,6 +1,6 @@
-import { MatColumn, matInputDisable, matInputRequire } from "./Mat.model";
+import { MatColumn, addGetPrototype, matInputDisable, matInputRequire } from "./Mat.model";
 
-export interface Organization {
+export class Organization {
     id?:                  string;
     users?:               User[];
     roles?:               Role[];
@@ -28,6 +28,7 @@ export class Role {
     @matInputRequire(true)
     title?:      string;
     active?:     boolean;
+
     permission?: Permission;
 
     constructor(id?: number, title?: string, active?: boolean, permission?: Permission) {
@@ -53,6 +54,7 @@ export class Role {
 }
 
 export class Permission {
+    @matInputDisable(true)
     id?:                        number;
     all?:                       boolean;
     readOrganizationUser?:      boolean;

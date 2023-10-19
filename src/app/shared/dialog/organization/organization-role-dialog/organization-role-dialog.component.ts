@@ -43,7 +43,7 @@ export class OrganizationRoleDialog extends ObjectDialog<Role, OrganizationServi
             if(r.id === role.id)
               return role;
             else
-              return r;
+              return r
           });
           service.patchOrganization(organization).pipe(first()).subscribe({
               next: (res) => resolve(role),

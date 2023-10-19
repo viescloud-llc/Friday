@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from '@angular/core';
+import { Component, OnInit, Type, forwardRef } from '@angular/core';
 import { OrganizationHomeComponent } from '../organization-home/organization-home.component';
 import { Role } from 'src/app/shared/model/Organization.model';
 import { MatType } from 'src/app/shared/model/Mat.model';
@@ -23,9 +23,12 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
   }
 
   onEditRow(role: Role) {
+    Object.setPrototypeOf(role, Role.prototype);
+
     let dialogData: ObjectDialogData<Role, OrganizationService> = {
       id: role.id!,
       service: this.organizationService,
+      blankObject: new Role(),
       getFn: async (service: OrganizationService, id: string | number) => {
         return new Promise<Role>((resolve, reject) => {
           resolve(role);
@@ -50,3 +53,4 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
     )
   }
 }
+

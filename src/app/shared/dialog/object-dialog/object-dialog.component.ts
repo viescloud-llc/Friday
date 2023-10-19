@@ -6,7 +6,8 @@ export interface ObjectDialogData<T = object, S = object> {
   service: S, 
   getFn: (service: S, id: any) => Promise<T> | T, 
   createFn?: (service: S, value: T) => Promise<T>, 
-  modifyFn?: (service: S, value: T) => Promise<T>
+  modifyFn?: (service: S, value: T) => Promise<T>,
+  blankObject?: T;
 }
 
 @Component({

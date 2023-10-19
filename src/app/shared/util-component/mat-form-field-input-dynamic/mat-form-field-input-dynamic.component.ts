@@ -1,6 +1,8 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { MatFormFieldComponent } from '../mat-form-field/mat-form-field.component';
-import { MatFromFieldInputDynamicData, MatOption } from '../../model/Mat.model';
+import { MatFromFieldInputDynamicData, MatFromFieldInputDynamicItem, MatItemSetting, MatItemSettingType, MatOption } from '../../model/Mat.model';
+import { UtilsService } from '../../service/Utils.service';
+import { Role } from '../../model/Organization.model';
 
 @Component({
   selector: 'app-mat-form-field-input-dynamic',
@@ -31,6 +33,12 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
     }
   ];
 
+  //dynamic type
+  @Input()
+  blankObject?: any;
+
+  items: MatFromFieldInputDynamicItem[] = [];
+
   constructor() {
     super();
   }
@@ -39,6 +47,34 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
     super.ngOnInit();
     if(!this.dynamicData)
       this.dynamicData = new MatFromFieldInputDynamicData(this.value);
+
+    if(this.isValueObject() && this.blankObject) {
+      this.parseItems();
+    }
+  }
+
+  //dynamic object
+  parseItems () {
+    this.items = [];
+    for (const [key, value] of Object.entries(this.value)) {
+      this.items.push(new MatFromFieldInputDynamicItem(this.value[key], key, value, this.getSetting(key)));
+    }
   }
   
+
+  private getSetting(key: string): MatItemSetting[] {
+    let prototype = Object.getPrototypeOf(this.blankObject!);
+    let settings: MatItemSetting[] = [];
+    let name = key + 'Disable';
+    if (Object.hasOwn(prototype, name)) {
+      settings.push(new MatItemSetting(MatItemSettingType.DISABLE));
+    }
+
+    name = key + 'Require';
+    if (Object.hasOwn(prototype, name)) {
+      settings.push(new MatItemSetting(MatItemSettingType.REQUIRE));
+    }
+
+    return settings;
+  }
 }
