@@ -97,13 +97,19 @@ export interface SMTP {
     password?: string;
 }
 
-export interface User {
+export class User {
     id?:          number;
     userProfile?: UserProfile;
     defineRole?:  Role[];
+
+    constructor(id?: number, userProfile?: UserProfile, defineRole?: Role[]) {
+        this.id = id;
+        this.userProfile = userProfile ?? new UserProfile();
+        this.defineRole = defineRole ?? [];
+    }
 }
 
-export interface UserProfile {
+export class UserProfile {
     id?:        number;
     alias?:     string;
     firstName?: string;
@@ -112,4 +118,15 @@ export interface UserProfile {
     city?:      string;
     state?:     string;
     zip?:       string;
+
+	constructor(id?: number, alias?: string, firstName?: string, lastName?: string, email?: string, city?: string, state?: string, zip?: string) {
+        this.id = id;
+        this.alias = alias;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+	}
 }

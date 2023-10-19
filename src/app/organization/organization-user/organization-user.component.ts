@@ -1,5 +1,6 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { OrganizationHomeComponent } from '../organization-home/organization-home.component';
+import { User } from 'src/app/shared/model/Organization.model';
 
 @Component({
   selector: 'app-organization-user',
@@ -8,5 +9,10 @@ import { OrganizationHomeComponent } from '../organization-home/organization-hom
   providers: [{ provide: OrganizationHomeComponent, useExisting: forwardRef(() => OrganizationUserComponent) }],
 })
 export class OrganizationUserComponent extends OrganizationHomeComponent {
+  users: User[] = [];
 
+  override async ngOnInit() {
+    await super.ngOnInit();
+    this.users = this.organization.users!;
+  }
 }

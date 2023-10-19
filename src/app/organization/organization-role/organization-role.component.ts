@@ -18,8 +18,8 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
   matColumns = Role.getDisplayColumns();
 
   override async ngOnInit() {
-      await super.ngOnInit();
-      this.matRows = this.organization.roles!;
+    await super.ngOnInit();
+    this.matRows = this.organization.roles!;
   }
 
   onEditRow(role: Role) {
