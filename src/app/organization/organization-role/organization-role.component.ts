@@ -37,11 +37,21 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
       // },
       modifyFn: async (service: OrganizationService, role: Role) => {
         return new Promise<Role>((resolve, reject) => {
-          resolve(role);
+          let organization = structuredClone(this.organization);
+          organization.roles!.map((r: Role) => {
+            if(r.id === role.id)
+              return role;
+            else
+              return r
+          });
+          service.patchOrganization(organization).pipe(first()).subscribe({
+              next: (res) => resolve(role),
+              error: (error) => reject(error)
+            })
         })
       }
     }
-    let dialog = this.matDialog.open(ObjectDialog, {data: dialogData})
+    let dialog = this.matDialog.open(ObjectDialog, {data: dialogData, width: '100%'})
 
     // let dialog = this.matDialog.open(OrganizationRoleDialog, {data: {role: role, organization: this.organization}});
 

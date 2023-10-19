@@ -24,11 +24,9 @@ export interface OrganizationProfile {
 export class Role {
     @matInputDisable(true)
     id?:         number;
-    @matInputDisable(true)
     @matInputRequire(true)
     title?:      string;
     active?:     boolean;
-
     permission?: Permission;
 
     constructor(id?: number, title?: string, active?: boolean, permission?: Permission) {

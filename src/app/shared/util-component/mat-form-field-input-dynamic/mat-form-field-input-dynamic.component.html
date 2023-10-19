@@ -50,15 +50,18 @@
 </ng-container>
 
 <ng-container *ngIf="isValueObject()">
+  <h2 class="text-center">{{objectLabel}}</h2>
   <ul *ngFor="let item of items">
-    <app-mat-form-field-input-dynamic
-    [label]="item.key"
-    [value]="item.value" (valueOutput)="item.setValueFn($event)"
-    [styleWidth]="styleWidth"
-    [disable]="item.containSetting('disable')"
-    [required]="item.containSetting('require')"
-    [blankObject]="item.blankObject"
-    ></app-mat-form-field-input-dynamic>
+    <li>
+      <app-mat-form-field-input-dynamic
+      [label]="item.key"
+      [value]="item.value" (valueOutput)="item.setValueFn($event)"
+      [styleWidth]="styleWidth"
+      [disable]="item.containSetting('disable')"
+      [required]="item.containSetting('require')"
+      [blankObject]="item.blankObject"
+      [objectLabel]="item.key"
+      ></app-mat-form-field-input-dynamic>
+    </li>
   </ul>
-  
 </ng-container>
