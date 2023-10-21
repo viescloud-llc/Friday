@@ -9,8 +9,9 @@ export enum MatType {
 }
 
 export enum MatItemSettingType {
-    DISABLE = <any>'disable',
-    REQUIRE = <any>'require'
+    DISABLE = <any>'Disable',
+    REQUIRE = <any>'Require',
+    INDEX = <any>'Index'
 }
 
 export class MatItemSetting {
@@ -128,31 +129,21 @@ export class MatList<T> {
     }
 }
 
-export class MatFromFieldInputDynamicData {
-    parentRef: any;
-    currentRef: any;
-
-    constructor(parentRef: any, currentRef?: any) {
-        this.parentRef = parentRef;
-
-        if(currentRef)
-            this.currentRef = currentRef;
-    }
-}
-
 export class MatFromFieldInputDynamicItem {
     ref: any;
     blankObject: any;
     key: string = '';
     value: any;
     settings: MatItemSetting[] = [];
+    index?: number;
 
-    constructor(ref: any, blankObject: any, keyLabel: string, value: any, settings: MatItemSetting[]) {
+    constructor(ref: any, blankObject: any, keyLabel: string, value: any, settings: MatItemSetting[], index?: number) {
         this.ref = ref;
         this.blankObject = blankObject;
         this.key = keyLabel;
         this.value = value;
         this.settings = settings;
+        this.index = index ?? 0;
     }
 
     setValueFn(value: any) {
@@ -182,37 +173,40 @@ export class MatFromFieldInputDynamicItem {
     }
 }
 
-export const matInputDisable = (disable: boolean) => {
+export const matInputDisable = (disable?: boolean) => {
     return function matInputDisable(object: any, key: any) {
-        let value = object[key];
-        let name = key + 'Disable'
-    
-        Object.defineProperty(object, name, {
-            value: disable,
-            writable: true,
-            configurable: true,
-            enumerable: true
-        })
+        addValue(object, key, MatItemSettingType.DISABLE.toString(), true, true);
     }
 }
 
-export const matInputRequire = (require: boolean) => {
+export const matInputRequire = (require?: boolean) => {
     return function matInputDisable(object: any, key: any) {
-        let value = object[key];
-        let name = key + 'Require'
-    
-        Object.defineProperty(object, name, {
-            value: require,
-            writable: true,
-            configurable: true,
-            enumerable: true
-        })
+        addValue(object, key, MatItemSettingType.REQUIRE.toString(), true, true);
+    }
+}
+
+export const matInputSetting = (index: number, require?: boolean, disable?: boolean, ) => {
+    return function matInputDisable(object: any, key: any) {
+        addValue(object, key, MatItemSettingType.INDEX.toString(), index, 0);
+        addValue(object, key, MatItemSettingType.DISABLE.toString(), disable, false);
+        addValue(object, key, MatItemSettingType.REQUIRE.toString(), require, false);
     }
 }
 
 export const addGetPrototype = (object: any) => {
     Object.defineProperty(object, "getPrototype", {
         value: function a() {},
+        writable: true,
+        configurable: true,
+        enumerable: true
+    })
+}
+
+const addValue = (object: any, key: any, surFix: string, value: any, defaultValue: any) => {
+    let name = key + surFix
+
+    Object.defineProperty(object, name, {
+        value: value ?? defaultValue,
         writable: true,
         configurable: true,
         enumerable: true

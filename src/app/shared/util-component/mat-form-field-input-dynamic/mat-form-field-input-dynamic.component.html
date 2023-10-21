@@ -58,13 +58,16 @@
   [styleWidth]="styleWidth"
   [disable]="disable"
   [required]="required"
+  [blankObject]="blankObject"
   ></app-mat-form-field-list-input>
 </ng-container>
 
-<ng-container *ngIf="isValueObject()">
-  <h2 class="text-center">{{objectLabel}}</h2>
-  <ul *ngFor="let item of items">
+<ng-container *ngIf="isValueObject() && !isValueArray()">
+  <ul>
     <li>
+      <h2 class="text-center" *ngIf="objectLabel">{{objectLabel}}</h2>
+    </li>
+    <li *ngFor="let item of items">
       <app-mat-form-field-input-dynamic
       [label]="item.key"
       [value]="item.value" (valueOutput)="item.setValueFn($event)"

@@ -1,6 +1,6 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import { Component, Input, SimpleChanges, forwardRef } from '@angular/core';
 import { MatFormFieldComponent } from '../mat-form-field/mat-form-field.component';
-import { MatFromFieldInputDynamicData, MatFromFieldInputDynamicItem, MatItemSetting, MatItemSettingType, MatOption } from '../../model/Mat.model';
+import { MatFromFieldInputDynamicItem, MatItemSetting, MatItemSettingType, MatOption } from '../../model/Mat.model';
 
 @Component({
   selector: 'app-mat-form-field-input-dynamic',
@@ -9,9 +9,6 @@ import { MatFromFieldInputDynamicData, MatFromFieldInputDynamicItem, MatItemSett
   providers: [{ provide: MatFormFieldComponent, useExisting: forwardRef(() => MatFormFieldInputDynamicComponent) }],
 })
 export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
-
-  @Input()
-  dynamicData?: MatFromFieldInputDynamicData;
 
   @Input()
   isPassword: boolean = false;
@@ -46,9 +43,12 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
 
   override ngOnInit() {
     super.ngOnInit();
-    if(!this.dynamicData)
-      this.dynamicData = new MatFromFieldInputDynamicData(this.value);
 
+    if(this.isValueObject() && this.blankObject)
+      this.parseItems();
+  }
+
+  override ngOnChanges(changes: SimpleChanges): void {
     if(this.isValueObject() && this.blankObject)
       this.parseItems();
   }
@@ -56,20 +56,32 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
   //dynamic object
   parseItems () {
     this.items = [];
+    let defaultIndex = 100;
     for (const [key, value] of Object.entries(this.value)) {
-      this.items.push(new MatFromFieldInputDynamicItem(this.value, this.blankObject[key], key, value, this.getSetting(key)));
+      this.items.push(new MatFromFieldInputDynamicItem(this.value, this.blankObject[key], key, value, this.getSetting(key), this.getIndex(key, defaultIndex)));
+      defaultIndex++;
     }
+    this.items = this.items.sort((a, b) => a.index! - b.index!);
+  }
+
+  private getIndex(key: string, defaultIndex: number): number {
+    let prototype = Object.getPrototypeOf(this.blankObject!);
+    let name = key + MatItemSettingType.INDEX.toString();
+    if (Object.hasOwn(prototype, name))
+      return prototype[name];
+    else
+      return defaultIndex;
   }
 
   private getSetting(key: string): MatItemSetting[] {
     let prototype = Object.getPrototypeOf(this.blankObject!);
     let settings: MatItemSetting[] = [];
-    let name = key + 'Disable';
+    let name = key + MatItemSettingType.DISABLE.toString();
     if (Object.hasOwn(prototype, name) && !!prototype[name]) {
       settings.push(new MatItemSetting(MatItemSettingType.DISABLE));
     }
 
-    name = key + 'Require';
+    name = key + MatItemSettingType.REQUIRE.toString();
     if (Object.hasOwn(prototype, name) && !!prototype[name]) {
       settings.push(new MatItemSetting(MatItemSettingType.REQUIRE));
     }

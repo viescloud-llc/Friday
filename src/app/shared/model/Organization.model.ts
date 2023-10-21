@@ -1,4 +1,4 @@
-import { MatColumn, addGetPrototype, matInputDisable, matInputRequire } from "./Mat.model";
+import { MatColumn, addGetPrototype, matInputDisable, matInputRequire, matInputSetting } from "./Mat.model";
 
 export class Organization {
     id?:                  string;
@@ -6,19 +6,42 @@ export class Organization {
     roles?:               Role[];
     organizationProfile?: OrganizationProfile;
     smtp?:                SMTP;
+
+    constructor() {
+
+    }
 }
 
-export interface OrganizationProfile {
+export class OrganizationProfile {
+    @matInputSetting(0, true, true)
     id?:           number;
-    publicEmail?:  string;
-    bio?:          string;
-    timeZone?:     string;
-    socialMedias?: string[];
+
+    @matInputSetting(1, true)
     name?:         string;
+
+    @matInputSetting(2, true)
+    publicEmail?:  string;
+
+    @matInputSetting(3, true)
+    timeZone?:     string;
+
+    @matInputSetting(4, true)
     address?:      string;
+
+    @matInputSetting(5, true)
     city?:         string;
+
+    @matInputSetting(6, true)
     state?:        string;
+
+    @matInputSetting(7, true)
     zip?:          number;
+
+    @matInputSetting(8, true)
+    bio?:          string;
+
+    @matInputSetting(9, true)
+    socialMedias?: string[];
 }
 
 export class Role {
@@ -105,7 +128,8 @@ export class User {
     constructor(id?: number, userProfile?: UserProfile, defineRole?: Role[]) {
         this.id = id;
         this.userProfile = userProfile ?? new UserProfile();
-        this.defineRole = defineRole ?? [];
+        this.defineRole = defineRole ?? [] as Role[];
+        Object.setPrototypeOf(this.defineRole, Role);
     }
 }
 
