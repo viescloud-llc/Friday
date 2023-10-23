@@ -11,7 +11,8 @@ export enum MatType {
 export enum MatItemSettingType {
     DISABLE = <any>'Disable',
     REQUIRE = <any>'Require',
-    INDEX = <any>'Index'
+    INDEX = <any>'Index',
+    HIDE = <any>'Hide'
 }
 
 export class MatItemSetting {
@@ -175,21 +176,28 @@ export class MatFromFieldInputDynamicItem {
 
 export const matInputDisable = (disable?: boolean) => {
     return function matInputDisable(object: any, key: any) {
-        addValue(object, key, MatItemSettingType.DISABLE.toString(), true, true);
+        addValue(object, key, MatItemSettingType.DISABLE.toString(), disable, true);
     }
 }
 
 export const matInputRequire = (require?: boolean) => {
-    return function matInputDisable(object: any, key: any) {
-        addValue(object, key, MatItemSettingType.REQUIRE.toString(), true, true);
+    return function matInputRequire(object: any, key: any) {
+        addValue(object, key, MatItemSettingType.REQUIRE.toString(), require, true);
     }
 }
 
-export const matInputSetting = (index: number, require?: boolean, disable?: boolean, ) => {
+export const matInputHide = (hide?: boolean) => {
+    return function matInputHide(object: any, key: any) {
+        addValue(object, key, MatItemSettingType.HIDE.toString(), hide, true);
+    }
+}
+
+export const matInputSetting = (index: number, require?: boolean, disable?: boolean, hide?: boolean) => {
     return function matInputDisable(object: any, key: any) {
         addValue(object, key, MatItemSettingType.INDEX.toString(), index, 0);
         addValue(object, key, MatItemSettingType.DISABLE.toString(), disable, false);
         addValue(object, key, MatItemSettingType.REQUIRE.toString(), require, false);
+        addValue(object, key, MatItemSettingType.HIDE.toString(), hide, false);
     }
 }
 

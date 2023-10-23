@@ -1,4 +1,4 @@
-import { MatColumn, addGetPrototype, matInputDisable, matInputRequire, matInputSetting } from "./Mat.model";
+import { MatColumn, addGetPrototype, matInputDisable, matInputHide, matInputRequire, matInputSetting } from "./Mat.model";
 
 export class Organization {
     id?:                  string;
@@ -121,7 +121,10 @@ export interface SMTP {
 }
 
 export class User {
+    @matInputDisable(true)
     id?:          number;
+
+    @matInputHide(true)
     userProfile?: UserProfile;
     defineRole?:  Role[];
 
@@ -134,6 +137,7 @@ export class User {
 }
 
 export class UserProfile {
+    @matInputDisable(true)
     id?:        number;
     alias?:     string;
     firstName?: string;
@@ -141,16 +145,16 @@ export class UserProfile {
     email?:     string;
     city?:      string;
     state?:     string;
-    zip?:       string;
+    zip?:       number;
 
-	constructor(id?: number, alias?: string, firstName?: string, lastName?: string, email?: string, city?: string, state?: string, zip?: string) {
-        this.id = id;
-        this.alias = alias;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
+	constructor(id?: number, alias?: string, firstName?: string, lastName?: string, email?: string, city?: string, state?: string, zip?: number) {
+        this.id = id ?? 0;
+        this.alias = alias ?? '';
+        this.firstName = firstName ?? '';
+        this.lastName = lastName ?? '';
+        this.email = email ?? '';
+        this.city = city ?? '';
+        this.state = state ?? '';
+        this.zip = zip ?? 0;
 	}
 }

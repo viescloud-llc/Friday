@@ -40,6 +40,7 @@
     <ng-container *ngIf="blankObjectType =='object'">
       <ng-container *ngFor="let item of value; let i = index; trackBy: trackByIndex;">
         <app-mat-form-field-input-dynamic
+        [label]="label"
         [value]="item" (valueOutput)="value[i] = $event"
         [blankObject]="blankObject"
         styleWidth="100%"

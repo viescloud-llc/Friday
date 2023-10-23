@@ -59,8 +59,16 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
   parseItems () {
     this.items = [];
     let defaultIndex = 100;
+
+    //check if value is null or undefine
+    if(!this.value) {
+      this.value = structuredClone(this.blankObject);
+      Object.setPrototypeOf(this.value , this.blankObject);
+    }
+
     for (const [key, value] of Object.entries(this.value)) {
-      this.items.push(new MatFromFieldInputDynamicItem(this.value, this.blankObject[key], key, value, this.getSetting(key), this.getIndex(key, defaultIndex)));
+      if(!this.isHide(key))
+        this.items.push(new MatFromFieldInputDynamicItem(this.value, this.blankObject[key], key, value, this.getSetting(key), this.getIndex(key, defaultIndex)));
       defaultIndex++;
     }
     this.items = this.items.sort((a, b) => a.index! - b.index!);
@@ -89,5 +97,11 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
     }
 
     return settings;
+  }
+
+  private isHide(key: string): boolean {
+    let prototype = Object.getPrototypeOf(this.blankObject!);
+    let name = key + MatItemSettingType.HIDE.toString();
+    return Object.hasOwn(prototype, name) && !!prototype[name];
   }
 }
