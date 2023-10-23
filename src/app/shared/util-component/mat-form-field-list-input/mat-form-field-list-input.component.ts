@@ -8,13 +8,14 @@ import { MatList } from '../../model/Mat.model';
   styleUrls: ['./mat-form-field-list-input.component.scss'],
   providers: [{provide: MatFormFieldComponent, useExisting: forwardRef(() => MatFormFieldListInputComponent)}],
 })
-export class MatFormFieldListInputComponent extends MatFormFieldComponent implements OnInit {
+export class MatFormFieldListInputComponent extends MatFormFieldComponent {
 
   @Input()
-  override value!: MatList<any>;
+  override value!: any[];
+  override valueCopy!: any[];
 
   @Output()
-  override valueOutput: EventEmitter<MatList<any>> = new EventEmitter();
+  override valueOutput: EventEmitter<any[]> = new EventEmitter();
   
   @Input()
   showSizeInput: boolean = true;
@@ -26,12 +27,18 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
 
   validForm: boolean = false;
 
+  @Input()
+  blankObject!: any;
+  blankObjectType!: string;
+
   constructor() {
     super();
   }
 
   override ngOnInit() {
-    this.listLength = this.value.size();
+    super.ngOnInit();
+    this.listLength = this.value.length;
+    this.updateBlankObjectType();
   }
 
   override isValidInput(): boolean {
@@ -46,29 +53,36 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
     if(this.reachMaxSize())
       this.listLength = this.maxSize;
 
-    while(this.value.size() < this.listLength) 
-      this.value.pushEmptyItem();
+    while(this.value.length < this.listLength) 
+      this.value.push(this.cloneBlankObject());
 
-    if(this.value.size() > this.listLength) {
-      let deleteSize = this.value.size() - this.listLength
-      this.value.getList().splice(this.listLength - 1, deleteSize);
+    if(this.value.length > this.listLength) {
+      let deleteSize = this.value.length - this.listLength
+      this.value.splice(this.listLength - 1, deleteSize);
     }
     
-    this.listLength = this.value.size();
+    this.listLength = this.value.length;
   }
 
   addNewItem() {
     if(!this.reachMaxSize())
-      this.value.pushEmptyItem();
-    this.listLength = this.value.size();
+      this.value.push(this.cloneBlankObject());
+    this.listLength = this.value.length;
   }
 
   clone(obj: any): any {
     return structuredClone(obj);
   }
 
+  cloneBlankObject() {
+    let clone = structuredClone(this.blankObject);
+    Object.setPrototypeOf(clone, this.blankObject);
+    console.log(clone);
+    return clone;
+  }
+
   remove(index: number): void {
-    this.value.getList().splice(index, 1);
+    this.value.splice(index, 1);
   }
 
   trackByIndex(index: number, obj: any): any {
@@ -76,7 +90,7 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
   }
 
   reachMaxSize(): boolean {
-    return this.value.size() >= this.maxSize;
+    return this.value.length >= this.maxSize;
   }
 
   getKeyAndValueList(obj: Object) {
@@ -87,4 +101,15 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent implem
     }
     return list;
   }
+
+  updateBlankObjectType() {
+    if(Array.isArray(this.blankObject))
+      this.blankObjectType = 'array';
+    else if(typeof this.blankObject === 'object')
+      this.blankObjectType = 'object';
+    else
+      this.blankObject = typeof this.blankObject;
+  }
 }
+  
+

@@ -43,13 +43,15 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
 
   override ngOnInit() {
     super.ngOnInit();
-
-    if(this.isValueObject() && this.blankObject)
-      this.parseItems();
+    this.init();
   }
 
   override ngOnChanges(changes: SimpleChanges): void {
-    if(this.isValueObject() && this.blankObject)
+    this.init();
+  }
+
+  init() {
+    if(this.isValueObject() && this.blankObject && !this.isValueArray())
       this.parseItems();
   }
 

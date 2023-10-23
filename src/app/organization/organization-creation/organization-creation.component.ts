@@ -20,7 +20,7 @@ export class OrganizationCreationComponent extends FixChangeDetection implements
   organizationProfile!: OrganizationProfile;
   smtp: SMTP = {};
 
-  socialMedias!: MatList<string>;
+  socialMedias!: string[];
   
   constructor(
     private organizationService: OrganizationService,
@@ -32,7 +32,7 @@ export class OrganizationCreationComponent extends FixChangeDetection implements
 
   ngOnInit() {
     this.organizationProfile = {socialMedias: []};
-    this.socialMedias = new MatList(this.organizationProfile.socialMedias!, MatType.STRING);
+    this.socialMedias = this.organizationProfile.socialMedias!;
   }
 
   createOrganization(): void {

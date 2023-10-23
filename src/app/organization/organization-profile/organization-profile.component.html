@@ -1,6 +1,6 @@
 <ul class="margin-center" *ngIf="organization && organization.organizationProfile" appMatFormFieldGroup (onAllInputCheck)="validForm = $event">
   <li><h1 class="text-center" style="color: blueviolet;">Organization Profile</h1></li>
-  <li>
+  <!-- <li>
     <app-mat-form-field-input
     label="ID"
     [value]="organization.id"
@@ -81,6 +81,7 @@
     [value]="socialMedias"
     inputType="string"
     [showSizeInput]="false"
+    [blankObject]="''"
     ></app-mat-form-field-list-input>
     <br>
   </li>
@@ -91,6 +92,14 @@
     (valueOutput)="organization.organizationProfile!.bio = $event"
     styleWidth="100%"
     ></app-mat-form-field-text-area>
+  </li> -->
+  <li>
+    <app-mat-form-field-input-dynamic
+    label="Organization Profile"
+    [value]="organization.organizationProfile" (valueOutput)="organization.organizationProfile = $event"
+    [blankObject]="blankObject"
+    styleWidth="100%"
+    ></app-mat-form-field-input-dynamic>
   </li>
   <li>
     <button mat-raised-button color="primary" style="width: 50%;" [disabled]="!validUpdate()" (click)="patchProfile()">Update Profile</button>

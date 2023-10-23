@@ -1,6 +1,7 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { OrganizationHomeComponent } from '../organization-home/organization-home.component';
 import { MatList, MatType } from 'src/app/shared/model/Mat.model';
+import { OrganizationProfile } from 'src/app/shared/model/Organization.model';
 
 @Component({
   selector: 'app-organization-profile',
@@ -9,10 +10,11 @@ import { MatList, MatType } from 'src/app/shared/model/Mat.model';
   providers: [{ provide: OrganizationHomeComponent, useExisting: forwardRef(() => OrganizationProfileComponent) }],
 })
 export class OrganizationProfileComponent extends OrganizationHomeComponent {
-  socialMedias!: MatList<string>;
+  socialMedias!: string[];
+  blankObject: OrganizationProfile = new OrganizationProfile();
 
   override async ngOnInit() {
       await super.ngOnInit();
-      this.socialMedias = new MatList(this.organization.organizationProfile!.socialMedias!, MatType.STRING);
+      this.socialMedias = this.organization.organizationProfile!.socialMedias!;
   }
 }

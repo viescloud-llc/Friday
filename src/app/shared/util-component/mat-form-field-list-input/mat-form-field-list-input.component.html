@@ -4,14 +4,14 @@
       List of {{label}}
     </mat-panel-title>
     <mat-panel-description>
-      Size: {{value.size()}}
+      Size: {{value.length}}
     </mat-panel-description>
   </mat-expansion-panel-header>
   <ul>
     <li *ngIf="showSizeInput">
       <app-mat-form-field-input
       [label]="'Number of ' + label"
-      [value]="value.size()"
+      [value]="value.length"
       (valueOutput)="listLength = $event"
       (onValueChange)="updateListLength()"
       defaultType="number"
@@ -25,11 +25,11 @@
       [focusoutEmit]="false"
       ></app-mat-form-field-input>
     </li>
-    <ng-container *ngIf="value.getType() !=='object' && value.getType() !=='array'">
-      <li *ngFor="let item of value.getList(); let i = index; trackBy: trackByIndex;">
+    <ng-container *ngIf="blankObjectType !=='object' && blankObjectType !=='array'">
+      <li *ngFor="let item of value; let i = index; trackBy: trackByIndex;">
         <app-mat-form-field-input
         [label]="label + ' ' + (i + 1)"
-        [value]="item" (valueOutput)="value.getList()[i] = $event"
+        [value]="item" (valueOutput)="value[i] = $event"
         styleWidth="100%"
         [required]="required"
         customIconLabel="remove_circle"
@@ -37,20 +37,16 @@
         ></app-mat-form-field-input>
       </li>
     </ng-container>
-    <mat-list *ngIf="value.getType() =='object'">
-      <ng-container *ngFor="let item of value.getMatItemList()">
-        <ng-container *ngIf="!item.isEmpty()">
-            <mat-list-item>
-              <mat-icon matListItemIcon>folder</mat-icon>
-              <div matListItemTitle>Title</div>
-              <div matListItemLine>{{item.key}}</div>
-            </mat-list-item>
-        </ng-container>
-        <ng-container *ngIf="item.isEmpty()">
-          <mat-divider></mat-divider>
-        </ng-container>
+    <ng-container *ngIf="blankObjectType =='object'">
+      <ng-container *ngFor="let item of value; let i = index; trackBy: trackByIndex;">
+        <app-mat-form-field-input-dynamic
+        [value]="item" (valueOutput)="value[i] = $event"
+        [blankObject]="blankObject"
+        styleWidth="100%"
+        ></app-mat-form-field-input-dynamic>
+        <hr>
       </ng-container>
-    </mat-list>
+    </ng-container>
     <li><button mat-raised-button color="primary" style="width: 100%;" (click)="addNewItem()" [disabled]="reachMaxSize()">Add new {{label}}</button></li>
   </ul>
 </mat-expansion-panel>

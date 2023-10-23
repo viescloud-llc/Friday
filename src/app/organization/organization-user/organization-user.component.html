@@ -1,5 +1,6 @@
 <app-mat-form-field-input-dynamic
-label="test"
-[value]="users"
+*ngIf="users"
+label="Users"
+[value]="users" (valueOutput)="users = $event"
 [blankObject]="blankUser"
 ></app-mat-form-field-input-dynamic>
