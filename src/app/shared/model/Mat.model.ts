@@ -15,6 +15,13 @@ export enum MatItemSettingType {
     HIDE = <any>'Hide'
 }
 
+export enum MatTableSettingType {
+    DISPLAY_VALUE_FN = <any>'DisplayValueFn',
+    DISPLAY_LABEL = <any>'Label',
+    INDEX = <any>'Index',
+    HIDE = <any>'Hide'
+}
+
 export class MatItemSetting {
     type: MatItemSettingType;
     value: any;
@@ -37,6 +44,7 @@ export interface MatDialogItem {
 }
 
 export interface MatColumn {
+    key: string;
     index: number;
     label?: string;
     getDisplayValueFn?: (obj: any) => any;
@@ -174,6 +182,8 @@ export class MatFromFieldInputDynamicItem {
     }
 }
 
+// Mat input
+
 export const matInputDisable = (disable?: boolean) => {
     return function matInputDisable(object: any, key: any) {
         addValue(object, key, MatItemSettingType.DISABLE.toString(), disable, true);
@@ -198,6 +208,28 @@ export const matInputSetting = (index: number, require?: boolean, disable?: bool
         addValue(object, key, MatItemSettingType.DISABLE.toString(), disable, false);
         addValue(object, key, MatItemSettingType.REQUIRE.toString(), require, false);
         addValue(object, key, MatItemSettingType.HIDE.toString(), hide, false);
+    }
+}
+
+// Mat table
+
+export const matTableIndex = (index: number) => {
+    return function matTableIndex(object: any, key: any) {
+        addValue(object, key, MatTableSettingType.INDEX.toString(), index, 0);
+    }
+}
+
+export const matTableHide = (hide?: boolean) => {
+    return function matTableHide(object: any, key: any) {
+        addValue(object, key, MatTableSettingType.HIDE.toString(), hide, false);
+    }
+}
+
+export const matTableSetting = (hide?: boolean, label?: string, displayValueFn?: Function) => {
+    return function matTableSetting(object: any, key: any) {
+        addValue(object, key, MatTableSettingType.HIDE.toString(), hide, false);
+        addValue(object, key, MatTableSettingType.DISPLAY_LABEL.toString(), label, null);
+        addValue(object, key, MatTableSettingType.DISPLAY_VALUE_FN.toString(), displayValueFn, null);
     }
 }
 

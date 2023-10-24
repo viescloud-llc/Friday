@@ -30,9 +30,6 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
 
   //dynamic type
   @Input()
-  blankObject?: any;
-
-  @Input()
   objectLabel?: string;
 
   items: MatFromFieldInputDynamicItem[] = [];

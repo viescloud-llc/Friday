@@ -15,7 +15,7 @@ import { OrganizationRoleDialog } from 'src/app/shared/dialog/organization/organ
 })
 export class OrganizationRoleComponent extends OrganizationHomeComponent {
   matRows: Role[] = [];
-  matColumns = Role.getDisplayColumns();
+  blankObject: Role = new Role();
 
   override async ngOnInit() {
     await super.ngOnInit();

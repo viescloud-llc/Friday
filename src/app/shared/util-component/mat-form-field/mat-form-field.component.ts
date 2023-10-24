@@ -58,6 +58,10 @@ export class MatFormFieldComponent implements OnInit, OnChanges {
   //key capture
   keyDown: string[] = [];
 
+  //dynamic type
+  @Input()
+  blankObject?: any;
+
   constructor() { }
 
   ngOnInit() {

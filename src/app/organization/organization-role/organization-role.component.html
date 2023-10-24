@@ -3,9 +3,9 @@
   <li *ngIf="matRows">
     <app-mat-table
     [matRows]="matRows"
-    [matColumns]="matColumns"
     [displayFilter]="true"
     [displayPagination]="true"
+    [blankObject]="blankObject"
     (onEditRow)="onEditRow($event)"
     ></app-mat-table>
   </li>

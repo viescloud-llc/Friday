@@ -57,37 +57,6 @@ export class Lobby {
                 maxNumberOfShip: 5
             }
     }
-
-    static getDisplayColumns(): MatColumn[] {
-        return [
-            {
-                index: 0,
-            },
-            {
-                index: 1,
-            },
-            {
-                index: 2,
-            },
-            {
-                index: 3,
-                label: 'game'
-            },
-            {
-                index: 5,
-                label: 'player'
-            },
-            {
-                index: 6,
-                label: 'max player'
-            },
-            {
-                index: 4,
-                label: 'password protected',
-                getDisplayValueFn: (lobby: Lobby) => !!lobby.password
-            }
-        ]
-    };
 }
 
 export interface Message {

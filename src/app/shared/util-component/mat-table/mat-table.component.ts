@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatColumn } from '../../model/Mat.model';
+import { MatColumn, MatTableSettingType } from '../../model/Mat.model';
 
 @Component({
   selector: 'app-mat-table',
@@ -17,8 +17,7 @@ export class MatTableComponent implements OnInit, OnChanges {
   @Input()
   matRows: object[] = [];
 
-  @Input()
-  matColumns!: MatColumn[]
+  matColumns: MatColumn[] = [];
 
   @Input()
   pagination: number[] = [5, 10, 25, 100];
@@ -41,6 +40,9 @@ export class MatTableComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  @Input()
+  blankObject?: any;
+
   constructor() { }
 
   ngOnInit() {
@@ -52,29 +54,76 @@ export class MatTableComponent implements OnInit, OnChanges {
   }
 
   init() {
-    if (!this.matColumns)
+    this.matColumns = [];
+    this.displayedColumns = [];
+    this.populateMatColumn();
+    this.filterColumns();
+
+    this.pagination = this.pagination.sort((a, b) => a - b);
+    this.dataSource.data = this.matRows;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  private populateMatColumn(): void {
+    if(!this.blankObject) {
       this.fillColumns();
-
-    if (this.matRows.length > 0) {
-      this.displayedColumns = [];
-      for (const [key, value] of Object.entries(this.matRows[0]))
-        this.displayedColumns.push(key.toString())
-
-      this.filterColumns();
-
-      this.pagination = this.pagination.sort((a, b) => a - b);
-      this.dataSource.data = this.matRows;
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
+      return;
+    }
+    
+    let index = 100;
+    for (const [key] of Object.entries(this.blankObject)) {
+      if(!this.isHide(key)) {
+        this.matColumns.push({
+          key: key.toString(),
+          index: this.getDisplayColumIndex(key, index),
+          label: this.getDisplayLabel(key),
+          getDisplayValueFn: this.getDisplayValueFn(key)
+        })
+      }
+      index++;
     }
   }
 
-  private fillColumns() {
+  private getDisplayLabel(key: string): string {
+    let prototype = Object.getPrototypeOf(this.blankObject!);
+    let name = key + MatTableSettingType.DISPLAY_LABEL.toString();
+    if (Object.hasOwn(prototype, name))
+      return prototype[name] as string;
+    else
+      return key;
+  }
+
+  private getDisplayValueFn(key: string): ((obj: any) => any)  | undefined {
+    let prototype = Object.getPrototypeOf(this.blankObject!);
+    let name = key + MatTableSettingType.DISPLAY_VALUE_FN.toString();
+    if (Object.hasOwn(prototype, name))
+      return prototype[name] as ((obj: any) => any);
+    else
+      return undefined;
+  }
+
+  private isHide(key: string): boolean {
+    let prototype = Object.getPrototypeOf(this.blankObject!);
+    let name = key + MatTableSettingType.HIDE.toString();
+    return Object.hasOwn(prototype, name) && !!prototype[name];
+  }
+
+  private getDisplayColumIndex(key: string, defaultIndex: number): number {
+    let prototype = Object.getPrototypeOf(this.blankObject!);
+    let name = key + MatTableSettingType.INDEX.toString();
+    if (Object.hasOwn(prototype, name))
+      return prototype[name] as number;
+    else
+      return defaultIndex;
+  }
+
+  private fillColumns(): void {
     if (this.matRows.length > 0) {
-      this.matColumns = [];
       let index = 0;
       for (const [key, value] of Object.entries(this.matRows[0])) {
         this.matColumns.push({
+          key: key.toString(),
           index: index,
           label: value
         })
@@ -86,19 +135,10 @@ export class MatTableComponent implements OnInit, OnChanges {
   private filterColumns() {
     if (this.matColumns) {
       this.matColumns = this.matColumns.sort((a, b) => a.index - b.index);
-      let newDisplayColumn: string[] = [];
       this.matColumns.forEach(e => {
-        let index = e.index;
-        newDisplayColumn.push(this.displayedColumns[index]);
+        this.displayedColumns.push(e.key);
       });
-      this.displayedColumns = newDisplayColumn;
     }
-  }
-
-  private indexingRow() {
-    this.matRows.forEach(e => {
-
-    })
   }
 
   getValue(element: object, label: string): any {

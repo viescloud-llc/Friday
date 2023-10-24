@@ -28,7 +28,6 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent {
   validForm: boolean = false;
 
   @Input()
-  blankObject!: any;
   blankObjectType!: string;
 
   constructor() {

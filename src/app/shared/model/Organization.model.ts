@@ -1,4 +1,4 @@
-import { MatColumn, addGetPrototype, matInputDisable, matInputHide, matInputRequire, matInputSetting } from "./Mat.model";
+import { MatColumn, addGetPrototype, matInputDisable, matInputHide, matInputRequire, matInputSetting, matTableHide, matTableIndex, matTableSetting } from "./Mat.model";
 
 export class Organization {
     id?:                  string;
@@ -50,6 +50,8 @@ export class Role {
     @matInputRequire(true)
     title?:      string;
     active?:     boolean;
+
+    @matTableHide(true)
     permission?: Permission;
 
     constructor(id?: number, title?: string, active?: boolean, permission?: Permission) {
@@ -57,20 +59,6 @@ export class Role {
         this.title = title ?? '';
         this.active = active ?? true;
         this.permission = permission ?? new Permission();
-    }
-
-    static getDisplayColumns(): MatColumn[] {
-        return [
-            {
-                index: 0
-            },
-            {
-                index: 1
-            },
-            {
-                index: 2
-            }
-        ]
     }
 }
 
