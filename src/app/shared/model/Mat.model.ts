@@ -184,24 +184,47 @@ export class MatFromFieldInputDynamicItem {
 
 // Mat input
 
+/**
+ * 
+ * @param disable input is disable
+ * @returns 
+ */
 export const matInputDisable = (disable?: boolean) => {
     return function matInputDisable(object: any, key: any) {
         addValue(object, key, MatItemSettingType.DISABLE.toString(), disable, true);
     }
 }
 
+/**
+ * 
+ * @param require input is require
+ * @returns 
+ */
 export const matInputRequire = (require?: boolean) => {
     return function matInputRequire(object: any, key: any) {
         addValue(object, key, MatItemSettingType.REQUIRE.toString(), require, true);
     }
 }
 
+/**
+ * 
+ * @param hide hidden this input
+ * @returns 
+ */
 export const matInputHide = (hide?: boolean) => {
     return function matInputHide(object: any, key: any) {
         addValue(object, key, MatItemSettingType.HIDE.toString(), hide, true);
     }
 }
 
+/**
+ * this function is all in one setting for dynamic input component
+ * @param index indexing input
+ * @param require input is require
+ * @param disable input is disable
+ * @param hide hidden this input
+ * @returns 
+ */
 export const matInputSetting = (index: number, require?: boolean, disable?: boolean, hide?: boolean) => {
     return function matInputDisable(object: any, key: any) {
         addValue(object, key, MatItemSettingType.INDEX.toString(), index, 0);
@@ -212,22 +235,36 @@ export const matInputSetting = (index: number, require?: boolean, disable?: bool
 }
 
 // Mat table
-
+/**
+ * 
+ * @param index indexing this column
+ * @returns 
+ */
 export const matTableIndex = (index: number) => {
     return function matTableIndex(object: any, key: any) {
         addValue(object, key, MatTableSettingType.INDEX.toString(), index, 0);
     }
 }
 
+/**
+ * 
+ * @param hide hidden column
+ * @returns 
+ */
 export const matTableHide = (hide?: boolean) => {
     return function matTableHide(object: any, key: any) {
         addValue(object, key, MatTableSettingType.HIDE.toString(), hide, false);
     }
 }
 
-export const matTableSetting = (hide?: boolean, label?: string, displayValueFn?: Function) => {
+/**
+ * 
+ * @param label label of column
+ * @param displayValueFn this function should be (obj: T) => string
+ * @returns 
+ */
+export const matTableSetting = (label?: string, displayValueFn?: Function) => {
     return function matTableSetting(object: any, key: any) {
-        addValue(object, key, MatTableSettingType.HIDE.toString(), hide, false);
         addValue(object, key, MatTableSettingType.DISPLAY_LABEL.toString(), label, null);
         addValue(object, key, MatTableSettingType.DISPLAY_VALUE_FN.toString(), displayValueFn, null);
     }
