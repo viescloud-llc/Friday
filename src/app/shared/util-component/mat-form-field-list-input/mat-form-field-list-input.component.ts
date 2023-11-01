@@ -75,7 +75,8 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent {
 
   cloneBlankObject() {
     let clone = structuredClone(this.blankObject);
-    Object.setPrototypeOf(clone, this.blankObject);
+    if(this.blankObjectType === 'object')
+      Object.setPrototypeOf(clone, this.blankObject);
     return clone;
   }
 
@@ -106,7 +107,7 @@ export class MatFormFieldListInputComponent extends MatFormFieldComponent {
     else if(typeof this.blankObject === 'object')
       this.blankObjectType = 'object';
     else
-      this.blankObject = typeof this.blankObject;
+      this.blankObjectType = typeof this.blankObject;
   }
 }
   

@@ -8,40 +8,39 @@ export class Organization {
     smtp?:                SMTP;
 
     constructor() {
-
     }
 }
 
 export class OrganizationProfile {
     @matInputSetting(0, true, true)
-    id?:           number;
+    id?:           number = 0;
 
     @matInputSetting(1, true)
-    name?:         string;
+    name?:         string = '';
 
     @matInputSetting(2, true)
-    publicEmail?:  string;
+    publicEmail?:  string = '';
 
     @matInputSetting(3, true)
-    timeZone?:     string;
+    timeZone?:     string = '';
 
     @matInputSetting(4, true)
-    address?:      string;
+    address?:      string = '';
 
     @matInputSetting(5, true)
-    city?:         string;
+    city?:         string = '';
 
     @matInputSetting(6, true)
-    state?:        string;
+    state?:        string = '';
 
     @matInputSetting(7, true)
-    zip?:          number;
+    zip?:          number = 0;
 
     @matInputSetting(8, true)
-    bio?:          string;
+    socialMedias?: string[] = [''] as string[];
 
     @matInputSetting(9, true)
-    socialMedias?: string[];
+    bio?:          string = '';
 }
 
 export class Role {
@@ -119,7 +118,7 @@ export class User {
     constructor(id?: number, userProfile?: UserProfile, defineRole?: Role[]) {
         this.id = id;
         this.userProfile = userProfile ?? new UserProfile();
-        this.defineRole = defineRole ?? [] as Role[];
+        this.defineRole = defineRole ?? [new Role()] as Role[];
         Object.setPrototypeOf(this.defineRole, Role);
     }
 }

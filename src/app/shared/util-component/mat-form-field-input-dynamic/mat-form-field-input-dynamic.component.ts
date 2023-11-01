@@ -65,10 +65,22 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
 
     for (const [key, value] of Object.entries(this.value)) {
       if(!this.isHide(key))
-        this.items.push(new MatFromFieldInputDynamicItem(this.value, this.blankObject[key], key, value, this.getSetting(key), this.getIndex(key, defaultIndex)));
+        this.items.push(new MatFromFieldInputDynamicItem(this.value, this.getKeyBlankObject(key), key, value, this.getSetting(key), this.getIndex(key, defaultIndex)));
       defaultIndex++;
     }
     this.items = this.items.sort((a, b) => a.index! - b.index!);
+  }
+
+  private getKeyBlankObject(key: string) {
+    let blankObj = this.blankObject[key];
+    if(Array.isArray(blankObj)) {
+      if(blankObj.length > 0)
+        return blankObj[0];
+      else 
+        throw new Error("blank object array type can't define\nPlease add and empty element to array inside object field")
+    }
+    else
+      return blankObj;
   }
 
   private getIndex(key: string, defaultIndex: number): number {
