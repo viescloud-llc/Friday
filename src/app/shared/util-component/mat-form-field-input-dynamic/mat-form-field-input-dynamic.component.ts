@@ -15,6 +15,8 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
 
   @Input()
   isEmail: boolean = false;
+  
+  validInput: boolean = false;
 
   // mat option
   options: MatOption[] = [
@@ -50,6 +52,10 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
   init() {
     if(this.isValueObject() && this.blankObject && !this.isValueArray())
       this.parseItems();
+  }
+
+  override isValidInput(): boolean {
+    return this.validInput;
   }
 
   //dynamic object

@@ -2,13 +2,14 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { ThemePalette } from '@angular/material/core';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { defaultTextColor } from 'src/app/app.module';
+import { FixChangeDetection } from '../../directive/FixChangeDetection';
 
 @Component({
   selector: 'app-mat-form-field',
   templateUrl: './mat-form-field.component.html',
   styleUrls: ['./mat-form-field.component.scss']
 })
-export class MatFormFieldComponent implements OnInit, OnChanges {
+export class MatFormFieldComponent extends FixChangeDetection implements OnInit, OnChanges {
 
   @Input()
   value: string | number | any = '';
@@ -62,7 +63,9 @@ export class MatFormFieldComponent implements OnInit, OnChanges {
   @Input()
   blankObject?: any;
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
     this.defaultTextColor = defaultTextColor;
