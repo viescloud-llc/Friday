@@ -1,6 +1,6 @@
 import { Component, OnInit, Type, forwardRef } from '@angular/core';
 import { OrganizationHomeComponent } from '../organization-home/organization-home.component';
-import { Role } from 'src/app/shared/model/Organization.model';
+import { Organization, Role } from 'src/app/shared/model/Organization.model';
 import { MatType } from 'src/app/shared/model/Mat.model';
 import { ObjectDialog, ObjectDialogData } from 'src/app/shared/dialog/object-dialog/object-dialog.component';
 import { OrganizationService } from 'src/app/shared/service/Organization.service';
@@ -32,9 +32,6 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
           resolve(role);
         })
       },
-      // createFn: async (role: Role, service: OrganizationService) => {
-      //   console.log('create')
-      // },
       modifyFn: async (service: OrganizationService, role: Role) => {
         return new Promise<Role>((resolve, reject) => {
           let organization = structuredClone(this.organization);
@@ -44,6 +41,7 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
             else
               return r
           });
+          organization = organization as Organization;
           service.patchOrganization(organization).pipe(first()).subscribe({
               next: (res) => resolve(role),
               error: (error) => reject(error)
@@ -51,12 +49,44 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
         })
       }
     }
-    let dialog = this.matDialog.open(ObjectDialog, {data: dialogData, width: '100%'})
 
-    // let dialog = this.matDialog.open(OrganizationRoleDialog, {data: {role: role, organization: this.organization}});
+    let dialog = this.matDialog.open(ObjectDialog, {data: dialogData, width: '100%'})
 
     dialog.afterClosed().pipe(first()).subscribe(
       res => {
+      }
+    )
+  }
+
+  addNewRole() {
+    let newRole = new Role();
+    let dialogData: ObjectDialogData<Role, OrganizationService> = {
+      id: 0,
+      service: this.organizationService,
+      blankObject: new Role(),
+      getFn: async (service: OrganizationService, id: string | number) => {
+        return new Promise<Role>((resolve, reject) => {
+          resolve(newRole);
+        })
+      },
+      createFn: async (service: OrganizationService, role: Role) => {
+        return new Promise<Role>((resolve, reject) => {
+          let organization = structuredClone(this.organization);
+          organization.roles!.push(role);
+          organization = organization as Organization;
+          service.patchOrganization(organization).pipe(first()).subscribe({
+              next: (res) => resolve(role),
+              error: (error) => reject(error)
+            })
+        })
+      }
+    }
+
+    let dialog = this.matDialog.open(ObjectDialog, {data: dialogData, width: '100%'})
+
+    dialog.afterClosed().pipe(first()).subscribe(
+      res => {
+        this.matRows.push(res);
       }
     )
   }

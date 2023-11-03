@@ -9,17 +9,17 @@ export enum MatType {
 }
 
 export enum MatItemSettingType {
-    DISABLE = <any>'Disable',
-    REQUIRE = <any>'Require',
-    INDEX = <any>'Index',
-    HIDE = <any>'Hide'
+    DISABLE = <any>'DisableItem',
+    REQUIRE = <any>'RequireItem',
+    INDEX = <any>'IndexItem',
+    HIDE = <any>'HideItem'
 }
 
 export enum MatTableSettingType {
     DISPLAY_VALUE_FN = <any>'DisplayValueFn',
-    DISPLAY_LABEL = <any>'Label',
-    INDEX = <any>'Index',
-    HIDE = <any>'Hide'
+    DISPLAY_LABEL = <any>'LabelColumn',
+    INDEX = <any>'IndexColumn',
+    HIDE = <any>'HideColumn'
 }
 
 export class MatItemSetting {
