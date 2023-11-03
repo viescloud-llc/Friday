@@ -16,4 +16,8 @@ export class OrganizationUserComponent extends OrganizationHomeComponent {
     await super.ngOnInit();
     this.users = this.organization.users!;
   }
+
+  onEditRow(user: User) {
+    
+  }
 }
