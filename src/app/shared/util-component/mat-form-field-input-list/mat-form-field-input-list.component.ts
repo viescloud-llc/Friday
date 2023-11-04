@@ -3,12 +3,12 @@ import { MatFormFieldComponent } from '../mat-form-field/mat-form-field.componen
 import { MatList } from '../../model/Mat.model';
 
 @Component({
-  selector: 'app-mat-form-field-list-input',
-  templateUrl: './mat-form-field-list-input.component.html',
-  styleUrls: ['./mat-form-field-list-input.component.scss'],
-  providers: [{provide: MatFormFieldComponent, useExisting: forwardRef(() => MatFormFieldListInputComponent)}],
+  selector: 'app-mat-form-field-input-list',
+  templateUrl: './mat-form-field-input-list.component.html',
+  styleUrls: ['./mat-form-field-input-list.component.scss'],
+  providers: [{provide: MatFormFieldComponent, useExisting: forwardRef(() => MatFormFieldInputListComponent)}],
 })
-export class MatFormFieldListInputComponent extends MatFormFieldComponent {
+export class MatFormFieldInputListComponent extends MatFormFieldComponent {
 
   @Input()
   override value!: any[];

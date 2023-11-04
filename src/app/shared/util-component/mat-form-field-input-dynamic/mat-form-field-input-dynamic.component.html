@@ -50,7 +50,7 @@
 </ng-container>
 
 <ng-container *ngIf="isValueArray()" appMatFormFieldGroup (onAllInputCheck)="validInput = $event">
-  <app-mat-form-field-list-input
+  <app-mat-form-field-input-list
   [label]="label"
   [value]="value" (valueOutput)="value = $event"
   (onValueChange)="emitValue()"
@@ -59,7 +59,7 @@
   [disable]="disable"
   [required]="required"
   [blankObject]="blankObject"
-  ></app-mat-form-field-list-input>
+  ></app-mat-form-field-input-list>
   <br>
 </ng-container>
 

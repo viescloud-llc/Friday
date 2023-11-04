@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { MatFormFieldListInputComponent } from './mat-form-field-list-input.component';
+import { MatFormFieldInputListComponent } from './mat-form-field-input-list.component';
 
 describe('MatFormFieldListInputComponent', () => {
-  let component: MatFormFieldListInputComponent;
-  let fixture: ComponentFixture<MatFormFieldListInputComponent>;
+  let component: MatFormFieldInputListComponent;
+  let fixture: ComponentFixture<MatFormFieldInputListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MatFormFieldListInputComponent ]
+      declarations: [ MatFormFieldInputListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MatFormFieldListInputComponent);
+    fixture = TestBed.createComponent(MatFormFieldInputListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

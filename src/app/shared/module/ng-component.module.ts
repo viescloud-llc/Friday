@@ -13,7 +13,7 @@ import { MatFormFieldTextAreaComponent } from '../util-component/mat-form-field-
 import { MatFormFieldComponent } from '../util-component/mat-form-field/mat-form-field.component';
 import { MatFormFieldInputTimeComponent } from '../util-component/mat-form-field-input-time/mat-form-field-input-time.component';
 import { MatFormFieldInputOptionComponent } from '../util-component/mat-form-field-input-option/mat-form-field-input-option.component';
-import { MatFormFieldListInputComponent } from '../util-component/mat-form-field-list-input/mat-form-field-list-input.component';
+import { MatFormFieldInputListComponent } from '../util-component/mat-form-field-input-list/mat-form-field-input-list.component';
 import { MatFormFieldInputDynamicComponent } from '../util-component/mat-form-field-input-dynamic/mat-form-field-input-dynamic.component';
 
 const list = [
@@ -29,7 +29,7 @@ const list = [
   MatFormFieldTextAreaComponent,
   MatFormFieldInputTimeComponent,
   MatFormFieldInputOptionComponent,
-  MatFormFieldListInputComponent,
+  MatFormFieldInputListComponent,
   MatFormFieldInputDynamicComponent
 ]
 
