@@ -38,7 +38,7 @@
 </ng-container>
 
 <ng-container *ngIf="isValueMultipleStringLine()" appMatFormFieldGroup (onAllInputCheck)="validInput = $event">
-  <app-mat-form-field-text-area
+  <app-mat-form-field-input-text-area
   [label]="label"
   [value]="value" (valueOutput)="value = $event"
   (onValueChange)="emitValue()"
@@ -46,7 +46,7 @@
   [styleWidth]="styleWidth"
   [disable]="disable"
   [required]="required"
-  ></app-mat-form-field-text-area>
+  ></app-mat-form-field-input-text-area>
 </ng-container>
 
 <ng-container *ngIf="isValueArray()" appMatFormFieldGroup (onAllInputCheck)="validInput = $event">
