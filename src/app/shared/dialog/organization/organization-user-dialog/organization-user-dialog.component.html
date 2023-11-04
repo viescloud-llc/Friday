@@ -1,15 +1,15 @@
-<h1 mat-dialog-title>{{getTitle()}}</h1>
+<h1 mat-dialog-title>User ID: {{value.id}}</h1>
 <div mat-dialog-content appMatFormFieldGroup (onAllInputCheck)="validForm = $event">
-  <ul *ngIf="value">
+  <ul>
     <li *ngIf="error">
       <h1 class="text-center" style="color: red">{{error}}</h1>
     </li>
     <li>
       <app-mat-form-field-input-dynamic
-      label="test dynamic object"
-      [value]="value" (valueOutput)="value = $event"
-      [blankObject]="data.blankObject"
-      styleWidth="100%"
+      label="User Profile"
+      objectLabel="User Profile"
+      [value]="value.userProfile" (valueOutput)="value.userProfile = $event"
+      [blankObject]="userProfileBlank"
       ></app-mat-form-field-input-dynamic>
     </li>
   </ul>

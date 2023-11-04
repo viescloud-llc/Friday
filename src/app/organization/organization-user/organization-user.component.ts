@@ -1,6 +1,8 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { OrganizationHomeComponent } from '../organization-home/organization-home.component';
 import { User } from 'src/app/shared/model/Organization.model';
+import { OrganizationUserDialog, OrganizationUserDialogData } from 'src/app/shared/dialog/organization/organization-user-dialog/organization-user-dialog.component';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-organization-user',
@@ -18,6 +20,18 @@ export class OrganizationUserComponent extends OrganizationHomeComponent {
   }
 
   onEditRow(user: User) {
-    
+    let dialogData: OrganizationUserDialogData = {
+      user: user,
+      organization: this.organization
+    }
+    let dialog = this.matDialog.open(OrganizationUserDialog, {data: dialogData});
+
+    dialog.afterClosed().pipe(first()).subscribe(
+      res => {
+        if(res) {
+
+        }
+      }
+    );
   }
 }

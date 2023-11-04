@@ -71,7 +71,7 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
 
     for (const [key, value] of Object.entries(this.value)) {
       if(!this.isHide(key))
-        this.items.push(new MatFromFieldInputDynamicItem(this.value, this.getKeyBlankObject(key), key, value, this.getSetting(key), this.getIndex(key, defaultIndex)));
+        this.items.push(new MatFromFieldInputDynamicItem(this.value, this.getKeyBlankObject(key), key, this.getValue(key, value), this.getSetting(key), this.getIndex(key, defaultIndex)));
       defaultIndex++;
     }
     this.items = this.items.sort((a, b) => a.index! - b.index!);
@@ -87,6 +87,12 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
     }
     else
       return blankObj;
+  }
+
+  private getValue(key: string, value: any) {
+    if(value)
+      return value;
+    else return this.getKeyBlankObject(key);
   }
 
   private getIndex(key: string, defaultIndex: number): number {

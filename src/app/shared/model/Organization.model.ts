@@ -1,4 +1,4 @@
-import { MatColumn, addGetPrototype, matInputDisable, matInputHide, matInputRequire, matInputSetting, matTableHide, matTableIndex, matTableSetting } from "./Mat.model";
+import { MatColumn, addGetPrototype, MatInputDisable, MatInputHide, MatInputRequire, MatInputSetting, MatTableHide, MatTableIndex, MatTableSetting } from "./Mat.model";
 
 export class Organization {
     id?:                  string;
@@ -12,45 +12,45 @@ export class Organization {
 }
 
 export class OrganizationProfile {
-    @matInputSetting(0, true, true)
+    @MatInputSetting(0, true, true)
     id?:           number = 0;
 
-    @matInputSetting(1, true)
+    @MatInputSetting(1, true)
     name?:         string = '';
 
-    @matInputSetting(2, true)
+    @MatInputSetting(2, true)
     publicEmail?:  string = '';
 
-    @matInputSetting(3, true)
+    @MatInputSetting(3, true)
     timeZone?:     string = '';
 
-    @matInputSetting(4, true)
+    @MatInputSetting(4, true)
     address?:      string = '';
 
-    @matInputSetting(5, true)
+    @MatInputSetting(5, true)
     city?:         string = '';
 
-    @matInputSetting(6, true)
+    @MatInputSetting(6, true)
     state?:        string = '';
 
-    @matInputSetting(7, true)
+    @MatInputSetting(7, true)
     zip?:          number = 0;
 
-    @matInputSetting(8, true)
+    @MatInputSetting(8, true)
     socialMedias?: string[] = [''] as string[];
 
-    @matInputSetting(9, true)
+    @MatInputSetting(9, true)
     bio?:          string = '';
 }
 
 export class Role {
-    @matInputDisable(true)
+    @MatInputDisable(true)
     id?:         number;
-    @matInputRequire(true)
+    @MatInputRequire(true)
     title?:      string;
     active?:     boolean;
 
-    @matTableHide(true)
+    @MatTableHide(true)
     permission?: Permission;
 
     constructor(id?: number, title?: string, active?: boolean, permission?: Permission) {
@@ -62,7 +62,7 @@ export class Role {
 }
 
 export class Permission {
-    @matInputDisable(true)
+    @MatInputDisable(true)
     id?:                        number;
     all?:                       boolean;
     readOrganizationUser?:      boolean;
@@ -108,11 +108,15 @@ export interface SMTP {
 }
 
 export class User {
-    @matInputDisable(true)
+    @MatInputDisable(true)
+    @MatTableSetting('User ID')
     id?:          number;
 
-    @matInputHide(true)
+    @MatInputHide(true)
+    @MatTableSetting('Name', (user: User) => user.userProfile?.alias ?? user.userProfile?.firstName + ' ' + user.userProfile?.lastName)
     userProfile?: UserProfile;
+
+    @MatTableSetting('Roles', (user: User) => user.defineRole?.reduce((a, c) => (a? a + ', ' : a) + c.title, ''))
     defineRole?:  Role[];
 
     constructor(id?: number, userProfile?: UserProfile, defineRole?: Role[]) {
@@ -124,14 +128,28 @@ export class User {
 }
 
 export class UserProfile {
-    @matInputDisable(true)
+    @MatInputDisable(true)
     id?:        number;
+
+    @MatInputDisable(true)
     alias?:     string;
+
+    @MatInputDisable(true)
     firstName?: string;
+
+    @MatInputDisable(true)
     lastName?:  string;
+
+    @MatInputDisable(true)
     email?:     string;
+
+    @MatInputDisable(true)
     city?:      string;
+
+    @MatInputDisable(true)
     state?:     string;
+
+    @MatInputDisable(true)
     zip?:       number;
 
 	constructor(id?: number, alias?: string, firstName?: string, lastName?: string, email?: string, city?: string, state?: string, zip?: number) {

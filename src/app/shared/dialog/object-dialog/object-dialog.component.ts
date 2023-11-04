@@ -3,7 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 export interface ObjectDialogData<T = object, S = object> {
   id: any, 
-  service: S, 
+  service: S,
+  title?: string, 
   getFn: (service: S, id: any) => Promise<T> | T, 
   createFn?: (service: S, value: T) => Promise<T>, 
   modifyFn?: (service: S, value: T) => Promise<T>,
@@ -79,5 +80,9 @@ export class ObjectDialog<T = object, S = object> implements OnInit, AfterViewCh
 
   revert() {
     this.value = structuredClone(this.valueCopy);
+  }
+
+  getTitle(): string {
+    return this.data.title ?? 'ID: ' + this.data.id;
   }
 }

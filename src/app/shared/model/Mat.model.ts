@@ -86,11 +86,11 @@ export class MatListItem<T> {
 
 export class MatList<T> {
 
-    constructor(protected list: T[], private matType: MatType) {
+    constructor(protected list: T[], private MatType: MatType) {
     }
 
     createEmptyItem(): T {
-        switch (this.matType) {
+        switch (this.MatType) {
             case MatType.OBJECT:
                 return {} as T;
             case MatType.ARRAY:
@@ -114,11 +114,11 @@ export class MatList<T> {
     }
 
     getMatType(): MatType {
-        return this.matType;
+        return this.MatType;
     }
 
     getType(): string {
-        return this.matType;
+        return this.MatType;
     }
 
     getList(): T[] {
@@ -189,8 +189,8 @@ export class MatFromFieldInputDynamicItem {
  * @param disable input is disable
  * @returns 
  */
-export const matInputDisable = (disable?: boolean) => {
-    return function matInputDisable(object: any, key: any) {
+export const MatInputDisable = (disable?: boolean) => {
+    return function MatInputDisable(object: any, key: any) {
         addValue(object, key, MatItemSettingType.DISABLE.toString(), disable, true);
     }
 }
@@ -200,8 +200,8 @@ export const matInputDisable = (disable?: boolean) => {
  * @param require input is require
  * @returns 
  */
-export const matInputRequire = (require?: boolean) => {
-    return function matInputRequire(object: any, key: any) {
+export const MatInputRequire = (require?: boolean) => {
+    return function MatInputRequire(object: any, key: any) {
         addValue(object, key, MatItemSettingType.REQUIRE.toString(), require, true);
     }
 }
@@ -211,8 +211,8 @@ export const matInputRequire = (require?: boolean) => {
  * @param hide hidden this input
  * @returns 
  */
-export const matInputHide = (hide?: boolean) => {
-    return function matInputHide(object: any, key: any) {
+export const MatInputHide = (hide?: boolean) => {
+    return function MatInputHide(object: any, key: any) {
         addValue(object, key, MatItemSettingType.HIDE.toString(), hide, true);
     }
 }
@@ -225,8 +225,8 @@ export const matInputHide = (hide?: boolean) => {
  * @param hide hidden this input
  * @returns 
  */
-export const matInputSetting = (index: number, require?: boolean, disable?: boolean, hide?: boolean) => {
-    return function matInputDisable(object: any, key: any) {
+export const MatInputSetting = (index: number, require?: boolean, disable?: boolean, hide?: boolean) => {
+    return function MatInputSetting(object: any, key: any) {
         addValue(object, key, MatItemSettingType.INDEX.toString(), index, 0);
         addValue(object, key, MatItemSettingType.DISABLE.toString(), disable, false);
         addValue(object, key, MatItemSettingType.REQUIRE.toString(), require, false);
@@ -240,8 +240,8 @@ export const matInputSetting = (index: number, require?: boolean, disable?: bool
  * @param index indexing this column
  * @returns 
  */
-export const matTableIndex = (index: number) => {
-    return function matTableIndex(object: any, key: any) {
+export const MatTableIndex = (index: number) => {
+    return function MatTableIndex(object: any, key: any) {
         addValue(object, key, MatTableSettingType.INDEX.toString(), index, 0);
     }
 }
@@ -251,8 +251,8 @@ export const matTableIndex = (index: number) => {
  * @param hide hidden column
  * @returns 
  */
-export const matTableHide = (hide?: boolean) => {
-    return function matTableHide(object: any, key: any) {
+export const MatTableHide = (hide?: boolean) => {
+    return function MatTableHide(object: any, key: any) {
         addValue(object, key, MatTableSettingType.HIDE.toString(), hide, false);
     }
 }
@@ -263,8 +263,8 @@ export const matTableHide = (hide?: boolean) => {
  * @param displayValueFn this function should be (obj: T) => string
  * @returns 
  */
-export const matTableSetting = (label?: string, displayValueFn?: Function) => {
-    return function matTableSetting(object: any, key: any) {
+export const MatTableSetting = (label?: string, displayValueFn?: Function) => {
+    return function MatTableSetting(object: any, key: any) {
         addValue(object, key, MatTableSettingType.DISPLAY_LABEL.toString(), label, null);
         addValue(object, key, MatTableSettingType.DISPLAY_VALUE_FN.toString(), displayValueFn, null);
     }

@@ -1,6 +1,6 @@
 
 <ul class="margin-center">
-    <li><h1 class="text-center">User list</h1></li>
+    <li><h1 class="text-center">Users</h1></li>
     <li *ngIf="users">
         <app-mat-table
         [matRows]="users"
@@ -16,8 +16,8 @@
         mat-raised-button color="primary" 
         style="width: 100%;" 
         [copyToClipboardValue]="organization.id"
-        copyMessage="Invitation code copied to clipboard"
-        >Copy invitation code: {{organization.id}}
+        copyMessage="Organization code copied to clipboard"
+        >Copy Organization code: {{organization.id}}
         </button>
     </li>
 </ul>
