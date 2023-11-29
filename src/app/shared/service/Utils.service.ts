@@ -147,4 +147,8 @@ export class UtilsService {
   static createObject<T>(_createClass: {new (): T}): T {
     return new _createClass();
   }
+
+  static getRandomInt(max: number) {
+    return Math.floor(Math.random() * max);
+  }
 }

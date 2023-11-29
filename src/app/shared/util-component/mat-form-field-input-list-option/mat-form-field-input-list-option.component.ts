@@ -10,7 +10,12 @@ import { UtilsService } from '../../service/Utils.service';
   styleUrls: ['./mat-form-field-input-list-option.component.scss'],
   providers: [{provide: MatFormFieldComponent, useExisting: forwardRef(() => MatFormFieldInputListOptionComponent)}],
 })
-export class MatFormFieldInputListOptionComponent<T extends Object> extends MatFormFieldInputListComponent {
+export class MatFormFieldInputListOptionComponent extends MatFormFieldInputListComponent {
+  
   @Input()
   options: MatOption[] = [];
+
+  override cloneBlankObject() {
+    return structuredClone(this.options[UtilsService.getRandomInt(this.options.length)].value);
+  }
 }

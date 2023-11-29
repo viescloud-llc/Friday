@@ -7,6 +7,7 @@
       Size: {{value.length}}
     </mat-panel-description>
   </mat-expansion-panel-header>
+  <br>
   <ul>
     <li *ngIf="showSizeInput">
       <app-mat-form-field-input
@@ -33,6 +34,7 @@
         [options]="options"
         styleWidth="95%"
         noneLabel=""
+        [required]="required"
         ></app-mat-form-field-input-option>
         <button mat-icon-button color="primary" (click)="remove(i)" style="width: 5%;">
           <mat-icon>delete</mat-icon>

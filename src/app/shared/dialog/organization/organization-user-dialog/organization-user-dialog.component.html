@@ -5,15 +5,6 @@
       <h1 class="text-center" style="color: red">{{error}}</h1>
     </li>
     <li>
-      <app-mat-form-field-input-list-option
-      label="Role"
-      [value]="value.defineRole!" (valueOutput)="value.defineRole = $event"
-      [options]="options"
-      [blankObject]="roleBlank"
-      styleWidth="100%"
-      ></app-mat-form-field-input-list-option>
-    </li>
-    <li>
       <app-mat-form-field-input-dynamic
       label="User Profile"
       objectLabel="User Profile"
@@ -22,10 +13,21 @@
       styleWidth="100%"
       ></app-mat-form-field-input-dynamic>
     </li>
+    <li>
+      <app-mat-form-field-input-list-option
+      label="Role"
+      [value]="value.defineRole!" (valueOutput)="value.defineRole = $event"
+      [options]="options"
+      [blankObject]="roleBlank"
+      [showSizeInput]="false"
+      styleWidth="100%"
+      [required]="true"
+      ></app-mat-form-field-input-list-option>
+    </li>
   </ul>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="primary" [disabled]="!validForm" (click)="triggerItemEvent()">{{getModifyLabel()}}</button>
+  <button mat-raised-button color="primary" [disabled]="!validForm || !isValueChange()" (click)="triggerItemEvent()">{{getModifyLabel()}}</button>
   <button mat-raised-button color="accent" [disabled]="!isValueChange()" (click)="revert()">Revert</button>
   <button mat-raised-button color="warn" mat-dialog-close>Close</button>
 </div>
