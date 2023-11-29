@@ -24,7 +24,7 @@ export class OrganizationUserComponent extends OrganizationHomeComponent {
       user: user,
       organization: this.organization
     }
-    let dialog = this.matDialog.open(OrganizationUserDialog, {data: dialogData});
+    let dialog = this.matDialog.open(OrganizationUserDialog, {data: dialogData, width: '100%'});
 
     dialog.afterClosed().pipe(first()).subscribe(
       res => {

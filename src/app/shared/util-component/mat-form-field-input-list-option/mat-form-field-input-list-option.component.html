@@ -19,7 +19,7 @@
       min="0"
       [max]="maxSize.toString()"
       [required]="true"
-      styleWidth="100%"
+      [styleWidth]="styleWidth"
       [manuallyEmitValue]="true"
       [showClearIcon]="false"
       [focusoutEmit]="false"
@@ -31,10 +31,10 @@
         [label]="label"
         [value]="value[i]" (valueOutput)="value[i] = $event"
         [options]="options"
-        styleWidth="100%"
+        styleWidth="95%"
         noneLabel=""
         ></app-mat-form-field-input-option>
-        <button mat-icon-button color="primary" (click)="remove(i)">
+        <button mat-icon-button color="primary" (click)="remove(i)" style="width: 5%;">
           <mat-icon>delete</mat-icon>
         </button>
         <hr>
