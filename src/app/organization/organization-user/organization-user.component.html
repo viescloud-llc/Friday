@@ -10,7 +10,7 @@
         (onEditRow)="onEditRow($event)"
         ></app-mat-table>
     </li>
-    <li *ngIf="organization.id">
+    <li *ngIf="organization && organization.id">
         <button 
         appCopyToClipboard
         mat-raised-button color="primary" 

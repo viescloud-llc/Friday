@@ -15,6 +15,7 @@ import { MatFormFieldInputTimeComponent } from '../util-component/mat-form-field
 import { MatFormFieldInputOptionComponent } from '../util-component/mat-form-field-input-option/mat-form-field-input-option.component';
 import { MatFormFieldInputListComponent } from '../util-component/mat-form-field-input-list/mat-form-field-input-list.component';
 import { MatFormFieldInputDynamicComponent } from '../util-component/mat-form-field-input-dynamic/mat-form-field-input-dynamic.component';
+import { MatFormFieldInputListOptionComponent } from '../util-component/mat-form-field-input-list-option/mat-form-field-input-list-option.component';
 
 const list = [
   CopyToClipboardUtilComponent,
@@ -30,7 +31,8 @@ const list = [
   MatFormFieldInputTimeComponent,
   MatFormFieldInputOptionComponent,
   MatFormFieldInputListComponent,
-  MatFormFieldInputDynamicComponent
+  MatFormFieldInputDynamicComponent,
+  MatFormFieldInputListOptionComponent
 ]
 
 @NgModule({

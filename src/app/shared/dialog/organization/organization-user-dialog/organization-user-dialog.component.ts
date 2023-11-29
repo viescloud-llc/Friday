@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { Organization, User, UserProfile } from 'src/app/shared/model/Organization.model';
+import { Organization, Role, User, UserProfile } from 'src/app/shared/model/Organization.model';
 import { OrganizationService } from 'src/app/shared/service/Organization.service';
 import { ObjectDialog, ObjectDialogData } from '../../object-dialog/object-dialog.component';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { first } from 'rxjs';
+import { MatOption } from 'src/app/shared/model/Mat.model';
 
 export interface OrganizationUserDialogData {
   user: User,
@@ -16,8 +17,11 @@ export interface OrganizationUserDialogData {
   styleUrls: ['./organization-user-dialog.component.scss']
 })
 export class OrganizationUserDialog extends ObjectDialog<User, OrganizationService> {
-
+  
   userProfileBlank: UserProfile = new UserProfile();
+  options: MatOption[] = [];
+  defineRoles: Role[] = [];
+  roleBlank = new Role();
 
   constructor(
     @Inject(MAT_DIALOG_DATA) data: OrganizationUserDialogData,
@@ -59,12 +63,17 @@ export class OrganizationUserDialog extends ObjectDialog<User, OrganizationServi
         })
       }
     }
-
     super(dialogData, dialogRef, cd);
+    let roles = data.organization.roles!;
+    roles.forEach(e => {
+      let option: MatOption = {
+        value: e,
+        valueLabel: e.title!,
+        disable: false
+      }
+      this.options.push(option);
+    })
+    this.defineRoles = data.user.defineRole!;
   }
 
-  override async init() {
-    await super.init();
-    
-  }
 }

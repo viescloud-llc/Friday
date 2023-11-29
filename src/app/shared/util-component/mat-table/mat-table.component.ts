@@ -9,13 +9,13 @@ import { MatColumn, MatTableSettingType } from '../../model/Mat.model';
   templateUrl: './mat-table.component.html',
   styleUrls: ['./mat-table.component.scss']
 })
-export class MatTableComponent implements OnInit, OnChanges {
+export class MatTableComponent<T extends object> implements OnInit, OnChanges {
 
   @Input()
   filterDisplay: number = 0;
 
   @Input()
-  matRows: object[] = [];
+  matRows: T[] = [];
 
   matColumns: MatColumn[] = [];
 
@@ -29,7 +29,7 @@ export class MatTableComponent implements OnInit, OnChanges {
   displayPagination: boolean = false;
 
   @Output()
-  onEditRow: EventEmitter<object> = new EventEmitter();
+  onEditRow: EventEmitter<T> = new EventEmitter();
 
   displayedColumns: string[] = [];
 
@@ -171,7 +171,7 @@ export class MatTableComponent implements OnInit, OnChanges {
     }
   }
 
-  editRow(row: object) {
+  editRow(row: T) {
     this.onEditRow.emit(row);
   }
 
