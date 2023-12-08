@@ -30,7 +30,7 @@ export class OrganizationRoleDialog extends ObjectDialog<Role, OrganizationServi
         return new Promise<Role>((resolve, reject) => {
           let organization = structuredClone(data.organization);
           organization.roles?.push(role);
-          service.patchOrganization(organization).pipe(first()).subscribe({
+          service.patch(organization.id, organization).pipe(first()).subscribe({
               next: (res) => resolve(role),
               error: (error) => reject(error)
             })
@@ -45,7 +45,7 @@ export class OrganizationRoleDialog extends ObjectDialog<Role, OrganizationServi
             else
               return r
           });
-          service.patchOrganization(organization).pipe(first()).subscribe({
+          service.patch(organization.id, organization).pipe(first()).subscribe({
               next: (res) => resolve(role),
               error: (error) => reject(error)
             })

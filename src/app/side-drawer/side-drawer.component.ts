@@ -34,7 +34,7 @@ export class SideDrawerComponent implements OnInit {
   }
 
   updateOrganizationList(): void {
-    this.organizationService.getOrganizations().pipe(first()).subscribe(
+    this.organizationService.getAll().pipe(first()).subscribe(
       res => {
         if(UtilsService.isNotEqual(this.organizations, res)) {
           this.organizations = res;

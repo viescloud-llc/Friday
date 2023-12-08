@@ -42,7 +42,7 @@ export class OrganizationHomeComponent extends FixChangeDetection implements OnI
 
   async init() {
     if(this.id)
-      return this.organizationService.getOrganizationAsync(this.id, 
+      return this.organizationService.getAsync(this.id, 
         (res) => {
           if (res) {
             this.organization = res;
@@ -69,7 +69,7 @@ export class OrganizationHomeComponent extends FixChangeDetection implements OnI
     if (!this.validUpdate())
       return;
 
-    this.organizationService.patchOrganization(this.organization).pipe(first()).subscribe(
+    this.organizationService.patch(this.organization.id ,this.organization).pipe(first()).subscribe(
       res => {
         if (res) {
           this.organization = res;
@@ -90,7 +90,7 @@ export class OrganizationHomeComponent extends FixChangeDetection implements OnI
     if (!this.validUpdate())
       return;
 
-    this.organizationService.putOrganization(this.organization).pipe(first()).subscribe(
+    this.organizationService.put(this.organization.id, this.organization).pipe(first()).subscribe(
       res => {
         if (res) {
           this.organization = res;

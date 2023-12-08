@@ -44,7 +44,7 @@ export class OrganizationCreationComponent extends FixChangeDetection implements
       smtp: this.smtp
     }
 
-    this.organizationService.postOrganization(organization).pipe(first()).subscribe(
+    this.organizationService.post(organization).pipe(first()).subscribe(
       res => {
         let successDialog = this.matDialog.open(ConfirmDialog, {data: {title: 'Organization Created', message: 'A new Organization have been created\nYou will be redirected to home page', no: '', yes: 'Go to home page'}})
         successDialog.afterClosed().pipe(first()).subscribe(

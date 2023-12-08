@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrganizationService } from 'src/app/shared/service/Organization.service';
 
 @Component({
   selector: 'app-organization-join',
@@ -8,10 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class OrganizationJoinComponent implements OnInit {
 
   organizationId: string = '';
+  message: string = '';
 
   validForm: boolean = false;
 
-  constructor() { }
+  constructor(
+    private organizationService: OrganizationService
+  ) { }
 
   ngOnInit() {
   }

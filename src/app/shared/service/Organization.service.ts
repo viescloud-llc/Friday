@@ -4,45 +4,26 @@ import { Organization } from '../model/Organization.model';
 import { HttpClient } from '@angular/common/http';
 import { SettingService } from './Setting.service';
 import { UtilsService } from './Utils.service';
+import { RestService } from './Rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrganizationService {
+export class OrganizationService extends RestService<Organization> {
+  
+  protected override getURL(): string {
+    return this.settingService.getGatewayUrl();
+  }
+  protected override getPrefixes(): string[] {
+    return ['saturday', 'organizations'];
+  }
 
-  private prefix = "saturday"
   selectedOrganizationId?: string;
 
   constructor(
-    private httpClient: HttpClient,
+    httpClient: HttpClient,
     private settingService: SettingService
-    ) { }
-
-  public getOrganizations(): Observable<Organization[]> {
-    return this.httpClient.get<Organization[]>(`${this.settingService.getGatewayUrl()}/${this.prefix}/organizations`);
-  }
-
-  public getOrganization(id: string): Observable<Organization> {
-    return this.httpClient.get<Organization>(`${this.settingService.getGatewayUrl()}/${this.prefix}/organizations/${id}`);
-  }
-
-  public postOrganization(organization: Organization): Observable<Organization> {
-    return this.httpClient.post<Organization>(`${this.settingService.getGatewayUrl()}/${this.prefix}/organizations`, organization);
-  }
-
-  public putOrganization(organization: Organization): Observable<Organization> {
-    return this.httpClient.put<Organization>(`${this.settingService.getGatewayUrl()}/${this.prefix}/organizations/${organization.id}`, organization);
-  }
-
-  public patchOrganization(organization: Organization): Observable<Organization> {
-    return this.httpClient.patch<Organization>(`${this.settingService.getGatewayUrl()}/${this.prefix}/organizations/${organization.id}`, organization);
-  }
-
-  public deleteOrganization(id: number): Observable<void> {
-    return this.httpClient.delete<void>(`${this.settingService.getGatewayUrl()}/${this.prefix}/organizations/${id}`);
-  }
-
-  public async getOrganizationAsync(id: string, nextFn?: (value: Organization) => void, errorFn?: (error: any) => void) {
-    return UtilsService.ObservableToPromise(this.getOrganization(id), nextFn, errorFn);
+    ) {
+    super(httpClient);
   }
 }

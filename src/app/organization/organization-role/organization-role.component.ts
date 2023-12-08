@@ -42,7 +42,7 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
               return r
           });
           organization = organization as Organization;
-          service.patchOrganization(organization).pipe(first()).subscribe({
+          service.patch(organization.id, organization).pipe(first()).subscribe({
               next: (res) => resolve(role),
               error: (error) => reject(error)
             })
@@ -74,7 +74,7 @@ export class OrganizationRoleComponent extends OrganizationHomeComponent {
           let organization = structuredClone(this.organization);
           organization.roles!.push(role);
           organization = organization as Organization;
-          service.patchOrganization(organization).pipe(first()).subscribe({
+          service.patch(organization.id, organization).pipe(first()).subscribe({
               next: (res) => resolve(role),
               error: (error) => reject(error)
             })
