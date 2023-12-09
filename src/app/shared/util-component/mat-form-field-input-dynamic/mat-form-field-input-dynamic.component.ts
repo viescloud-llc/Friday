@@ -15,6 +15,9 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
 
   @Input()
   isEmail: boolean = false;
+
+  @Input()
+  isTextArea: boolean = false;
   
   validInput: boolean = false;
 
@@ -42,6 +45,10 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
 
   override ngOnInit() {
     super.ngOnInit();
+
+    if(!this.blankObject)
+      this.blankObject = this.value;
+
     this.init();
   }
 
@@ -107,6 +114,7 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
   private getSetting(key: string): MatItemSetting[] {
     let prototype = Object.getPrototypeOf(this.blankObject!);
     let settings: MatItemSetting[] = [];
+
     let name = key + MatItemSettingType.DISABLE.toString();
     if (Object.hasOwn(prototype, name) && !!prototype[name]) {
       settings.push(new MatItemSetting(MatItemSettingType.DISABLE));
@@ -124,5 +132,17 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
     let prototype = Object.getPrototypeOf(this.blankObject!);
     let name = key + MatItemSettingType.HIDE.toString();
     return Object.hasOwn(prototype, name) && !!prototype[name];
+  }
+
+  public containHide(item: MatFromFieldInputDynamicItem) {
+    return item.containSetting(MatItemSettingType.HIDE);
+  }
+
+  public containRequire(item: MatFromFieldInputDynamicItem) {
+    return item.containSetting(MatItemSettingType.REQUIRE);
+  }
+
+  public containDisable(item: MatFromFieldInputDynamicItem) {
+    return item.containSetting(MatItemSettingType.DISABLE);
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FixChangeDetection } from 'src/app/shared/directive/FixChangeDetection';
+import { OrganizationJoinRequest } from 'src/app/shared/model/Organization.model';
 import { OrganizationService } from 'src/app/shared/service/Organization.service';
 
 @Component({
@@ -6,18 +8,20 @@ import { OrganizationService } from 'src/app/shared/service/Organization.service
   templateUrl: './organization-join.component.html',
   styleUrls: ['./organization-join.component.scss']
 })
-export class OrganizationJoinComponent implements OnInit {
+export class OrganizationJoinComponent extends FixChangeDetection implements OnInit {
 
-  organizationId: string = '';
-  message: string = '';
+  organizationJoinRequest!: OrganizationJoinRequest;
 
   validForm: boolean = false;
 
   constructor(
     private organizationService: OrganizationService
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit() {
+    this.organizationJoinRequest = new OrganizationJoinRequest();
   }
 
 }

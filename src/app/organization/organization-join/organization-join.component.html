@@ -4,15 +4,12 @@
   </li>
   <li>
     <h3>Know your organization ID number?</h3>
-    <app-mat-form-field-input
-    label="Organization ID"
-    (valueOutput)="organizationId = $event"
-    styleWidth="100%"
-    [required]="true"
-    ></app-mat-form-field-input>
   </li>
   <li>
-    
+    <app-mat-form-field-input-dynamic
+    [value]="organizationJoinRequest" (valueOutput)="organizationJoinRequest = $event"
+    styleWidth="100%"
+    ></app-mat-form-field-input-dynamic>
   </li>
   <li>
     <button mat-raised-button color="primary" style="width: 100%;" [disabled]="!validForm">Join</button>

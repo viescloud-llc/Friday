@@ -9,11 +9,15 @@ export enum MatType {
 }
 
 export enum MatItemSettingType {
-    DISABLE = <any>'DisableItem',
     REQUIRE = <any>'RequireItem',
+    DISABLE = <any>'DisableItem',
     INDEX = <any>'IndexItem',
-    HIDE = <any>'HideItem'
+    TEXT_AREA = <any>'TextAreaItem',
+    EXPANSION_PANEL = <any>'ExpansionPanelItem',
+    HIDE = <any>'HideItem',
 }
+
+
 
 export enum MatTableSettingType {
     DISPLAY_VALUE_FN = <any>'DisplayValueFn',
@@ -161,7 +165,16 @@ export class MatFromFieldInputDynamicItem {
 
     containSetting(setting: string | MatItemSettingType): boolean {
         let include = false;
-        
+
+        let foundReverse = MatItemSettingType[setting as any];
+
+        if(foundReverse) {
+            this.settings.forEach(e => {
+                if(e.equalType(setting as MatItemSettingType))
+                    include = true;
+            })
+        }
+
         if(typeof setting === 'string') {
             setting = MatItemSettingType[setting.toUpperCase() as any];
             if(setting) {
@@ -171,13 +184,7 @@ export class MatFromFieldInputDynamicItem {
                 })
             }
         }
-        else {
-            this.settings.forEach(e => {
-                if(e.equalType(setting as MatItemSettingType))
-                    include = true;
-            })
-        }
-
+        
         return include;
     }
 }
@@ -254,6 +261,28 @@ export const MatInputHideAll = (hide: boolean, keys: string[]) => {
         for(let key of keys) {
             addValue(object.prototype, key, MatItemSettingType.HIDE.toString(), hide, true);
         }
+    }
+}
+
+/**
+ * this function set a field dynamic input to be text area
+ * @param disable input is text area
+ * @returns 
+ */
+export const MatInputTextArea = (disable?: boolean) => {
+    return function MatInputTextArea(object: any, key: any) {
+        addValue(object, key, MatItemSettingType.TEXT_AREA.toString(), disable, true);
+    }
+}
+
+/**
+ * this function set a field dynamic input to have expansion panel
+ * @param disable input have expansion panel
+ * @returns 
+ */
+export const MatInputExpansionPanel = (disable?: boolean) => {
+    return function MatInputExpansionPanel(object: any, key: any) {
+        addValue(object, key, MatItemSettingType.EXPANSION_PANEL.toString(), disable, true);
     }
 }
 

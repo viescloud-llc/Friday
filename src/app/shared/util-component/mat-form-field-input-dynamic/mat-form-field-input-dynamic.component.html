@@ -73,8 +73,8 @@
       [label]="item.key"
       [value]="item.value" (valueOutput)="item.setValueFn($event)"
       [styleWidth]="styleWidth"
-      [disable]="item.containSetting('disable')"
-      [required]="item.containSetting('require')"
+      [disable]="containDisable(item)"
+      [required]="containRequire(item)"
       [blankObject]="item.blankObject"
       [objectLabel]="item.key"
       ></app-mat-form-field-input-dynamic>
