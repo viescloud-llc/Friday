@@ -185,7 +185,7 @@ export class MatFromFieldInputDynamicItem {
 // Mat input
 
 /**
- * 
+ * this function set a field dynamic input to disable
  * @param disable input is disable
  * @returns 
  */
@@ -196,7 +196,21 @@ export const MatInputDisable = (disable?: boolean) => {
 }
 
 /**
- * 
+ * this function set all field in object to be disable in dynamic input
+ * @param disable input is disable
+ * @returns 
+ */
+export const MatInputDisableAll = (disable: boolean, keys: string[]) => {
+    return function MatInputDisableAll(object: any) {
+        for(let key of keys) {
+            addValue(object.prototype, key, MatItemSettingType.DISABLE.toString(), disable, true);
+        }
+    }
+}
+
+
+/**
+ * this function set a field dynamic input to require
  * @param require input is require
  * @returns 
  */
@@ -207,13 +221,39 @@ export const MatInputRequire = (require?: boolean) => {
 }
 
 /**
- * 
+ * this function set all field in object to be require in dynamic input
+ * @param require input is require
+ * @returns 
+ */
+export const MatInputRequireAll = (require: boolean, keys: string[]) => {
+    return function MatInputRequireAll(object: any) {
+        for(let key of keys) {
+            addValue(object.prototype, key, MatItemSettingType.REQUIRE.toString(), require, true);
+        }
+    }
+}
+
+/**
+ * this function set a field dynamic input to hidden
  * @param hide hidden this input
  * @returns 
  */
 export const MatInputHide = (hide?: boolean) => {
     return function MatInputHide(object: any, key: any) {
         addValue(object, key, MatItemSettingType.HIDE.toString(), hide, true);
+    }
+}
+
+/**
+ * this function set all field in object to be hidden in dynamic input
+ * @param hide hidden this input
+ * @returns 
+ */
+export const MatInputHideAll = (hide: boolean, keys: string[]) => {
+    return function MatInputHideAll(object: any) {
+        for(let key of keys) {
+            addValue(object.prototype, key, MatItemSettingType.HIDE.toString(), hide, true);
+        }
     }
 }
 

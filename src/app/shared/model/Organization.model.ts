@@ -1,4 +1,4 @@
-import { MatColumn, addGetPrototype, MatInputDisable, MatInputHide, MatInputRequire, MatInputSetting, MatTableHide, MatTableIndex, MatTableSetting } from "./Mat.model";
+import { MatColumn, addGetPrototype, MatInputDisable, MatInputHide, MatInputRequire, MatInputSetting, MatTableHide, MatTableIndex, MatTableSetting, MatInputDisableAll } from "./Mat.model";
 
 export class Organization {
     id?:                  string;
@@ -127,39 +127,52 @@ export class User {
     }
 }
 
+@MatInputDisableAll(true, ['id', 'alias', 'firstName', 'lastName', 'email', 'city', 'state', 'zip'])
 export class UserProfile {
-    @MatInputDisable(true)
-    id?:        number;
+    id?:        number = 0;
+    alias?:     string = '';
+    firstName?: string = '';
+    lastName?:  string = '';
+    email?:     string = '';
+    city?:      string = '';
+    state?:     string = '';
+    zip?:       number = 0;
+}
 
-    @MatInputDisable(true)
-    alias?:     string;
+export class OrganizationJoinRequest {
+    @MatInputHide(true)
+    id:             number = 0;
 
-    @MatInputDisable(true)
-    firstName?: string;
+    @MatInputHide(true)
+    userId:         number = 0;
+    organizationId: string = '';
+    message:        string = '';
+    timeCreated:    TimeCreated = new TimeCreated();
+}
 
+export class TimeCreated {
     @MatInputDisable(true)
-    lastName?:  string;
-
+    year:      number = 0;
     @MatInputDisable(true)
-    email?:     string;
-
+    month:     number = 0;
     @MatInputDisable(true)
-    city?:      string;
-
+    day:       number = 0;
     @MatInputDisable(true)
-    state?:     string;
-
+    hours:     number = 0;
     @MatInputDisable(true)
-    zip?:       number;
-
-	constructor(id?: number, alias?: string, firstName?: string, lastName?: string, email?: string, city?: string, state?: string, zip?: number) {
-        this.id = id ?? 0;
-        this.alias = alias ?? '';
-        this.firstName = firstName ?? '';
-        this.lastName = lastName ?? '';
-        this.email = email ?? '';
-        this.city = city ?? '';
-        this.state = state ?? '';
-        this.zip = zip ?? 0;
-	}
+    minute:    number = 0;
+    @MatInputDisable(true)
+    second:    number = 0;
+    @MatInputDisable(true)
+    bypassMax: boolean = false;
+    @MatInputDisable(true)
+    id:        number = 0;
+    @MatInputDisable(true)
+    status:    string = '';
+    @MatInputDisable(true)
+    time:      string = '';
+    @MatInputDisable(true)
+    date:      string = '';
+    @MatInputDisable(true)
+    maxDay:    number = 0;
 }
