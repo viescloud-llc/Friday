@@ -12,7 +12,7 @@ export class Organization {
 }
 
 export class OrganizationProfile {
-    @MatInputSetting(0, true, true)
+    @MatInputSetting(0, true, true, true)
     id?:           number = 0;
 
     @MatInputSetting(1, true)

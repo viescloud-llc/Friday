@@ -17,8 +17,6 @@ export enum MatItemSettingType {
     HIDE = <any>'HideItem',
 }
 
-
-
 export enum MatTableSettingType {
     DISPLAY_VALUE_FN = <any>'DisplayValueFn',
     DISPLAY_LABEL = <any>'LabelColumn',
@@ -27,10 +25,10 @@ export enum MatTableSettingType {
 }
 
 export class MatItemSetting {
-    type: MatItemSettingType;
+    type: MatItemSettingType | string;
     value: any;
 
-    constructor(type: MatItemSettingType, value?: any) {
+    constructor(type: MatItemSettingType | string, value?: any) {
         this.type = type;
         if(value)
             this.value = value;
@@ -39,7 +37,7 @@ export class MatItemSetting {
     }
 
     equalType(type: MatItemSettingType) {
-        return this.type === type;
+        return this.type.toString() === type.toString();
     }
 }
 
@@ -349,7 +347,7 @@ export const addGetPrototype = (object: any) => {
 }
 
 const addValue = (object: any, key: any, surFix: string, value: any, defaultValue: any) => {
-    let name = key + surFix
+    let name = key + surFix;
 
     Object.defineProperty(object, name, {
         value: value ?? defaultValue,

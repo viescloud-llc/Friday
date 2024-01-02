@@ -115,18 +115,16 @@ export class MatFormFieldInputDynamicComponent extends MatFormFieldComponent {
     let prototype = Object.getPrototypeOf(this.blankObject!);
     let settings: MatItemSetting[] = [];
 
-    let name = key + MatItemSettingType.DISABLE.toString();
-    if (Object.hasOwn(prototype, name) && !!prototype[name]) {
-      settings.push(new MatItemSetting(MatItemSettingType.DISABLE));
-    }
-
-    name = key + MatItemSettingType.REQUIRE.toString();
-    if (Object.hasOwn(prototype, name) && !!prototype[name]) {
-      settings.push(new MatItemSetting(MatItemSettingType.REQUIRE));
+    for(let type in MatItemSettingType) {
+      let name = key + type;
+      if (Object.hasOwn(prototype, name) && !!prototype[name])
+        settings.push(new MatItemSetting(type));
     }
 
     return settings;
   }
+
+
 
   private isHide(key: string): boolean {
     let prototype = Object.getPrototypeOf(this.blankObject!);
