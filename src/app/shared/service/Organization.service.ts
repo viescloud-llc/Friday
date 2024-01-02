@@ -1,19 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Organization, OrganizationJoinRequest } from '../model/Organization.model';
 import { HttpClient } from '@angular/common/http';
-import { SettingService } from './Setting.service';
-import { UtilsService } from './Utils.service';
-import { RestService } from './Rest.service';
+import { ViesRestService } from './Rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrganizationService extends RestService<Organization> {
-  
-  protected override getURL(): string {
-    return this.settingService.getGatewayUrl();
-  }
+export class OrganizationService extends ViesRestService<Organization> {
 
   protected override getPrefixes(): string[] {
     return ['saturday', 'organizations'];
@@ -21,10 +14,7 @@ export class OrganizationService extends RestService<Organization> {
 
   selectedOrganizationId?: string;
 
-  constructor(
-    httpClient: HttpClient,
-    private settingService: SettingService
-    ) {
+  constructor(httpClient: HttpClient) {
     super(httpClient);
   }
 }
@@ -32,11 +22,7 @@ export class OrganizationService extends RestService<Organization> {
 @Injectable({
   providedIn: 'root'
 })
-export class OrganizationJoinRequestService extends RestService<OrganizationJoinRequest> {
-  
-  protected override getURL(): string {
-    return this.settingService.getGatewayUrl();
-  }
+export class OrganizationJoinRequestService extends ViesRestService<OrganizationJoinRequest> {
 
   protected override getPrefixes(): string[] {
     return ['saturday', 'organizationJoinRequests'];
@@ -44,10 +30,7 @@ export class OrganizationJoinRequestService extends RestService<OrganizationJoin
 
   selectedOrganizationId?: string;
 
-  constructor(
-    httpClient: HttpClient,
-    private settingService: SettingService
-    ) {
+  constructor(httpClient: HttpClient) {
     super(httpClient);
   }
 }
