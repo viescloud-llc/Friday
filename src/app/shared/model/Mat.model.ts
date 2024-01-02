@@ -1,4 +1,13 @@
-import { AfterContentChecked, ChangeDetectorRef, Directive } from "@angular/core";
+export enum PropertyMatcherEnum {
+    CASE_SENSITIVE = "CASE_SENSITIVE",
+    CONTAINS = "CONTAINS",
+    ENDS_WITH = "ENDS_WITH",
+    EXACT = "EXACT",
+    IGNORE_CASE = "IGNORE_CASE",
+    REGEX = "REGEX",
+    STARTS_WITH = "STARTS_WITH",
+    DEFAULT = "DEFAULT"
+}
 
 export enum MatType {
     OBJECT = 'object',
